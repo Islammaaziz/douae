@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> Dashboard_personnel</title>
+    <title> Dashboard stageaires</title>
    
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -17,19 +17,36 @@
     <link href="{{ asset('import/css/sb-admin-2.min.css') }}" rel="stylesheet">
 <script src="{{ asset('import/js/vendor/fontawesome-free/js/all.min.js') }}"></script>
 
-
 <style>
-.bg{
-    background-color: #7093fa;
-}
-
-
-
+    .bg{
+        background-color: #7093fa;
+    }
+    
+.formation-en-cours {
+        display: inline-block;
+        color: green;
+        animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    .sign{
+        color: green;
+        margin-top: 10px
+    }
 </style>
 
 </head>
 
-<body id="page-top"  class="dark-mode">
+<body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -42,7 +59,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                
-                    <div class="sidebar-brand-text mx-3"><h4><i class="fas fa-bars"></i> Menu Employe</h4></div>
+                    <div class="sidebar-brand-text mx-3"><h4><i class="fas fa-bars"></i> Menu Stageaire</h4></div>
             </a>
 
             <!-- Divider -->
@@ -50,7 +67,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{route('dashboard_per')}}">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Tableau de bord</span></a>
             </li>
@@ -95,31 +112,20 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-chalkboard-teacher"></i>
-                    <span>Mes Formation</span>
+                    <span>Espace Formations</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Formation</h6>
-                        <a class="collapse-item" href="{{ route('formation_per')}}">Mes Formations</a>
-                        <a class="collapse-item" href="{{ route('prochain_formation_per')}}">prochaines Formations</a>
-
-                      
+                        <h6 class="collapse-header"> Formation</h6>
+                        <a class="collapse-item" href="{{ route('formation_stg')}}">Mes formations</a>
+                        <a class="collapse-item" href="{{ route('prochain_formation_stg')}}">prochain formation</a>
                         
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
-
-          
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('conge_per')}}">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Conge</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            
+      
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -149,7 +155,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <h3>BC SKILLS</h3>
+                   <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -205,21 +211,17 @@
                                     </div>
                                 </a>
                             @endforeach
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-success">
-                                        <i class="fas fa-donate text-white"></i>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                    @if($derniereConge)
-                                        <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
-                                        <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }}</span>
-                                    @else
-                                        <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
-                                    @endif
-                                </div>
-                            </a>
+                                    <div>
+                                        <div class="small text-gray-500">Avril 29, 2024</div>
+                                        <span class="font-weight-bold">   Formation de Marketing Digital
+                                    </div>
+                                </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -259,6 +261,8 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Parametres
                                 </a>
+                               
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('Rlogin')}}" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -277,10 +281,9 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1>Tableau de bord</h1>
-                        
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard Stageaire</h1>
+                       
                     </div>
-                    
 
                     <!-- Content Row -->
                     <div class="row">
@@ -292,7 +295,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Employe</div>
+                                                Stagiaire</div>
                                                 @if(session('userName'))
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Mr.{{ session('userName') }}</div>
                                             @endif
@@ -306,24 +309,8 @@
                         </div>
 
                         <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Jour De Conge (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$dernierConge->annual_conge_days}} Jours</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-user-graduate fa-fw"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    
 
-                        <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
@@ -359,12 +346,18 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                               Etat De derneir Conge</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$dernierConge->status}}</div>
+                                                Formation en cours</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$formationEnCours->titre}}</div>
+                                           
+
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-umbrella-beach fa-fw"></i>
+                                            <i class="fas fa-chalkboard-teacher"></i>
                                         </div>
+                                        
+                                    </div>
+                                    <div >
+                                        <h6 class="sign"><p class="formation-en-cours">&#x2022;</p> Formation en cours</h6>
                                     </div>
                                 </div>
                             </div>
@@ -384,7 +377,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Personnel</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Stageaires</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="dropdown no-arrow">
@@ -395,8 +388,8 @@
                                     </div>
                                       
                                 </div>
-                    
-                        
+                        >
+                              
                                 <div class="card shadow mb-4">
                                    
                                     <div class="card-body">
@@ -543,14 +536,23 @@
     <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
-    <script>document.addEventListener('DOMContentLoaded', function() {
-        const body = document.querySelector('body');
-        const toggleDarkModeButton = document.querySelector('#toggle-dark-mode');
-    
-        toggleDarkModeButton.addEventListener('click', function() {
-            body.classList.toggle('dark-mode');
+   
+    <script>
+        // Check if dark mode is enabled
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+        }
+
+        // Toggle dark mode
+        document.getElementById('toggle-dark-mode').addEventListener('click', function() {
+            document.body.classList.toggle('dark');
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.removeItem('theme');
+            }
         });
-    });</script>
+    </script>
 
 </body>
 

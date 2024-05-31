@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,79 +10,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>SB Admin 2 - Tables</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <link href="{{ asset('import/css/sb-admin-2.min.css') }}" rel="stylesheet">
-<script src="{{ asset('import/js/vendor/fontawesome-free/js/all.min.js') }}"></script>
-
-    <style>
-        body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #d5cece;
-      color: #fff;
-    }
-
-    tr:hover {
-      background-color: #f2f2f2;
-    }
-
-    .confirm-btn, .reject-btn {
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .confirm-btn {
-      background-color: #5cb85c;
-      color: #fff;
-    }
-
-    .confirm-btn:hover {
-      background-color: #4cae4c;
-    }
-
-    .reject-btn {
-      background-color: #d9534f;
-      color: #fff;
-    }
-
-    .reject-btn:hover {
-      background-color: #c9302c;
-    }
+    <script src="{{ asset('import/js/vendor/fontawesome-free/js/all.min.js') }}"></script>
 
 
 
-
-    </style>
 
 </head>
 
 <body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
+     <!-- Page Wrapper -->
+     <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -109,7 +54,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                   Espace Personnels
+                  Espace  Personnel
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -151,7 +96,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                  Espace  Services
+                   Espace Services
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -174,12 +119,11 @@
     
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('show_conge')}}">
+                    <a class="nav-link" href="{{ route('show_conge') }}">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Conge</span></a>
                 </li>
     
-
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="buttons.html">
@@ -215,7 +159,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                 <h3>BC SKILLS</h3>
+                  <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -271,23 +215,21 @@
                                    </div>
                                </a>
                            @endforeach
-                          
-                            <div>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
+                           <div>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
                                     </div>
-                                    <div>
-                                        @if($derniereConge)
-                                            <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
-                                            <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
-                                        @else
-                                            <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
-                                        @endif
-                                    </div>
-                                </a>
+                                </div>
+                                <div>
+                                    @if($derniereConge)
+                                        <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
+                                        <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
+                                    @else
+                                        <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
+                                    @endif
+                                </div>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -313,7 +255,7 @@
 
                                   
                             @endif
-                                <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
+            <img src="{{ asset('import/img/islam.jpeg') }}"  class="img-profile rounded-circle" alt="Logo" width="20px">
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -344,48 +286,49 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Demande Conge</h1>
+          
+
+                    <!-- DataTales Example -->
+                    <div class="container">
+                        <h1>Liste des utilisateurs inscrits à la formation: {{ $formation->titre }}</h1>
+                
+                        @if($utilisateurs->isEmpty())
+                            <p>Aucun utilisateur n'est inscrit à cette formation.</p>
+                        @else
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Email</th>
+                                        <th>Rôle</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Email</th>
+                                        <th>Rôle</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @foreach($utilisateurs as $utilisateur)
+                                        <tr>
+                                            <td>{{ $utilisateur->pivot->nom }}</td>
+                                            <td>{{ $utilisateur->pivot->prenom }}</td>
+                                            <td>{{ $utilisateur->email }}</td>
+                                            <td>{{ $utilisateur->pivot->role }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @endif
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
-                <table>
-                    <thead>
-                      <tr>
-                     
-                        <th>Nom Employé</th>
-                        <th>Date Début</th>
-                        <th>Date Fin</th>
-                        <th>Motif</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                       
-                          <th>Nom Employé</th>
-                          <th>Date Début</th>
-                          <th>Date Fin</th>
-                          <th>Motif</th>
-                          <th>Action</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($demandesConge as $demande)
-                            <tr>
-                                <td>{{ $demande->first_name }} {{ $demande->laste_name }}</td>
-                                <td>{{ $demande->start_date }}</td>
-                                <td>{{ $demande->end_date }}</td>
-                                <td>{{ $demande->comment }}</td>
-                                <td>
-                                  <a href="{{ route('conge_confirmer', ['id' => $demande->id]) }}"> <button class="confirm-btn">Confirmer</button></a>
-                                  <a href="{{ route('conge_rejeter', ['id' => $demande->id]) }}"> <button class="reject-btn">Rejeter</button></a>
-                                  </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
 
-
-                </table>
             </div>
             <!-- End of Main Content -->
 
@@ -394,6 +337,7 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Creer par &copy;ISLAM,DOUAE,MOHAMED</span>
+
                     </div>
                 </div>
             </footer>
@@ -430,6 +374,7 @@
         </div>
     </div>
 
+ 
     <script src="{{ asset('import/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('import/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('import/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
@@ -437,6 +382,8 @@
     <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
+    
+
 
 </body>
 

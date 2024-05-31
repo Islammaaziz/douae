@@ -3,28 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Employe;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\RegistrationConfirmation;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users|max:255',
-            'password' => 'required|string|confirmed|min:8',
-        ]);
-
-        $user = User::create([
+        $employe = Employe::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'poste' => $request->poste,
+            'phone' => $request->phone,
+            'departement' => $request->departement,
+            'date_d_embauche' => now(),
         ]);
 
-        // Rediriger l'utilisateur vers une page de confirmation ou de connexion
-        return redirect()->route('Rlogin')->with('success', 'Your account has been created successfully!');
+        // Envoi de l'e-mail de confirmation
+       // Mail::to($employe->email)->send(new RegistrationConfirmation());
+
+        // Redirection vers une page de confirmation ou de connexion
+        return redirect()->route('Rlogin')->with('success', 'Votre compte a été créé avec succès !');
     }
 }

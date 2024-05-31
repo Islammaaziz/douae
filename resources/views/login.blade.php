@@ -19,7 +19,7 @@
 
     <style>
         body {
-            background-color: #2a57de;
+            background-color: #7093fa;
         }
 
         .container {
@@ -50,6 +50,10 @@
         .logo-container img {
             width: 240px;
         }
+        .choise{
+            text-align: center;
+            justify-content: space-between;
+        }
     </style>
 </head>
 
@@ -66,16 +70,33 @@
 
                             </div>
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Bienvenue !</h1>
                             </div>
-                            <form class="user" method="POST" action="{{ route('login') }}">
+                            <form class="user mx-auto" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." value="{{old('email')}}">
+                                    <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Entrer votre Email..." value="{{old('email')}}">
                                     @error('email')
-                                 <span class="text-danger">  {{$message}}</span> 
+                                    <span class="text-danger"> {{$message}}</span> 
                                     @enderror
                                 </div>
+                                <div class="form-group-choise" >
+                                    <div class="choice">
+                                        <label for="employee_radio">
+                                            <input type="radio" id="employee_radio" name="user_type" value="employe">
+                                            Employe
+                                        </label>
+                            
+                                        <label for="intern_radio">
+                                            <input type="radio" id="intern_radio" name="user_type" value="stagiaire">
+                                            Stageaire
+                                        </label>
+                                        @error('user_type')
+                                        <span class="text-danger"> {{$message}}</span> 
+                                        @enderror
+                                    </div>
+                                </div>
+                            
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                                 </div>
@@ -83,25 +104,25 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox small">
                                         <input type="checkbox" class="custom-control-input" id="customCheck">
-                                        <label class="custom-control-label" for="customCheck">Remember
-                                            Me</label>
+                                        <label class="custom-control-label" for="customCheck">Souvenez-vous de moi</label>
                                     </div>
                                 </div>
-                               <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">Se Connecter</button>
                                 <hr>
                                 <a href="#" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Login with Google
+                                    <i class="fab fa-google fa-fw"></i> Se Connecter avec Google
                                 </a>
                                 <a href="#" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                    <i class="fab fa-facebook-f fa-fw"></i> Se Connecter avec Facebook
                                 </a>
                             </form>
+                            
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="#">Forgot Password?</a>
+                                <a class="small" href="{{ route('signup') }}">registrer en tant que Employe</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{{ route('signup') }}">Create an Account!</a>
+                                <a class="small" href="{{ route('signup_stg') }}">registrer en tant que stageaire</a>
                             </div>
                         </div>
                     </div>

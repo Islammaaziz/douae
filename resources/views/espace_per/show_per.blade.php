@@ -11,87 +11,61 @@
 
     <title>SB Admin 2 - Blank</title>
 
+    <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <link href="{{ asset('import/css/sb-admin-2.min.css') }}" rel="stylesheet">
 <script src="{{ asset('import/js/vendor/fontawesome-free/js/all.min.js') }}"></script>
 
     <style>
-        body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
+.bg{
+    background-color: #7093fa;
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+}
 
-    th, td {
-      padding: 10px;
+         .form-container {
+      max-width: 500px;
+      margin: auto;
+      margin-top: 50px;
+    }
+    .card {
+      border-radius: 15px;
+    }
+    .card-header {
+      border-radius: 15px 15px 0 0;
+    }
+    .form-group {
       text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #d5cece;
-      color: #fff;
-    }
-
-    tr:hover {
-      background-color: #f2f2f2;
-    }
-
-    .confirm-btn, .reject-btn {
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .confirm-btn {
-      background-color: #5cb85c;
-      color: #fff;
-    }
-
-    .confirm-btn:hover {
-      background-color: #4cae4c;
-    }
-
-    .reject-btn {
-      background-color: #d9534f;
-      color: #fff;
-    }
-
-    .reject-btn:hover {
-      background-color: #c9302c;
+    }*
+    .title{
+        margin-left: 20px;
     }
 
 
 
 
-    </style>
+    #btn-aj{
+        width: 500px;
+    }
+
+      </style>
 
 </head>
 
-<body id="page-top">
+<body id="page-top"  class="dark-mode">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg sidebar sidebar-dark accordion" id="accordionSidebar">
             <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo">
 
            
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                
-                    <div class="sidebar-brand-text mx-3"><h4><i class="fas fa-bars"></i> Menu RH</h4></div>
+                    <div class="sidebar-brand-text mx-3"><h4><i class="fas fa-bars"></i> Menu Employe</h4></div>
             </a>
 
             <!-- Divider -->
@@ -99,93 +73,73 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('homepage') }}">
+                <a class="nav-link" href="{{ route('dashboard_per') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Tableau de bord</span></a>
-                </li>
+            </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-    
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                   Espace Personnels
-                </div>
-    
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-user"></i>
-                        <span>Employes</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Operations:</h6>
-                            <a class="collapse-item" href="{{ route('employes_show') }}">Consulter Employes</a>
-                            <a class="collapse-item" href="{{ route('employes_add') }}">Ajouter Employes</a>
-                        </div>
-                    </div>
-                </li>
-    
-                <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-user-graduate"></i>
-                        <span>Stageaires</span>
-                    </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Operations</h6>
-                            <a class="collapse-item" href="{{ route('stageaires_show') }}">Consulter Stageaires</a>
-                            <a class="collapse-item" href="{{ route('stageaires_add') }}">Ajouter Stageaires</a>
-                            
-                        </div>
-                    </div>
-                </li>
-    
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-    
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                  Espace  Services
-                </div>
-    
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ route('formation') }}" data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <span>Formation</span>
-                    </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Formation </h6>
-                            <a class="collapse-item" href="{{ route('formation') }}">Consulter Formation</a>
-                            <a class="collapse-item" href="{{ route('formation_add') }}">Ajouter Formation</a>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-                            
-                        </div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Espace Personnel
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-user"></i>
+                    <span>Employes</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Operations:</h6>
+                        <a class="collapse-item" href="{{ route('show_per') }}">Consulter Mes informations</a>
+                        <a class="collapse-item" href="{{route('edit_per')}}">Modifier Mes informations</a>
+                    </div>  
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+          
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Espace Services
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Mes Formations</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Formation </h6>
+                        <a class="collapse-item" href="{{ route('formation_per')}}">Mes Formations</a>
+                        <a class="collapse-item" href="{{ route('formation_per')}}">prochaines Formations</a>
+                        
+                        
                     </div>
-                </li>
-    
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('show_conge')}}">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Conge</span></a>
-                </li>
-    
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('conge_per') }}">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Conge</span></a>
+            </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="buttons.html">
-                    <i class="fas fa-user-clock"></i>
-                    <span>Abscence</span></a>
-            </li>
+           
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -215,7 +169,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                 <h3>BC SKILLS</h3>
+                   <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -271,23 +225,21 @@
                                    </div>
                                </a>
                            @endforeach
-                          
+                           <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-success">
+                                    <i class="fas fa-donate text-white"></i>
+                                </div>
+                            </div>
                             <div>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        @if($derniereConge)
-                                            <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
-                                            <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
-                                        @else
-                                            <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
-                                        @endif
-                                    </div>
-                                </a>
+                                @if($derniereConge)
+                                    <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
+                                    <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }}</span>
+                                @else
+                                    <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
+                                @endif
+                            </div>
+                        </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -314,7 +266,6 @@
                                   
                             @endif
                                 <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
-
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -327,6 +278,7 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Parametres
                                 </a>
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('Rlogin')}}" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -344,48 +296,46 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Demande Conge</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Bonjour Mr.{{ $user->first_name }} {{$user->last_name}}</h1>
 
                 </div>
                 <!-- /.container-fluid -->
-                <table>
-                    <thead>
-                      <tr>
-                     
-                        <th>Nom Employé</th>
-                        <th>Date Début</th>
-                        <th>Date Fin</th>
-                        <th>Motif</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                       
-                          <th>Nom Employé</th>
-                          <th>Date Début</th>
-                          <th>Date Fin</th>
-                          <th>Motif</th>
-                          <th>Action</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($demandesConge as $demande)
-                            <tr>
-                                <td>{{ $demande->first_name }} {{ $demande->laste_name }}</td>
-                                <td>{{ $demande->start_date }}</td>
-                                <td>{{ $demande->end_date }}</td>
-                                <td>{{ $demande->comment }}</td>
-                                <td>
-                                  <a href="{{ route('conge_confirmer', ['id' => $demande->id]) }}"> <button class="confirm-btn">Confirmer</button></a>
-                                  <a href="{{ route('conge_rejeter', ['id' => $demande->id]) }}"> <button class="reject-btn">Rejeter</button></a>
-                                  </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+                <form action="traitement.php" method="post" enctype="multipart/form-data">
+                    <div class="title">
+                      <label for="nom">Nom :</label>
+                      <input type="text" class="form-control" id="nom" name="nom" required value=" {{ $user->first_name }}">
+                    </div>
+                    <div class="title">
+                      <label for="prenom">Prénom :</label>
+                      <input type="text" class="form-control" id="prenom" name="prenom" required value=" {{ $user->last_name }}">
+                    </div>
+                    
+                    <div class="title">
+                      <label for="poste">Poste :</label>
+                      <input type="text" class="form-control" id="poste" name="poste" required value=" {{ $user->poste }}">
+                    </div>
+                    <div class="title">
+                        <label for="phone">telephone :</label>
+                        <input type="text" class="form-control" id="phone" name="phone" required value=" {{ $user->phone }}">
+                      </div>
+                    <div class="title">
+                      <label for="Date_d_embauche">Date d'embauche :</label>
+                      <input  class="form-control" id="Date_d_embauche" name="Date_d_embauche" required value=" {{ $user->Date_d_embauche }}">
+                    </div>
+                    <div class="title">
+                      <label for="departement">Département :</label>
+                      <input type="text" class="form-control" id="departement" name="departement" required value=" {{ $user->departement }}">
+                    </div>
+                    <div class="title">
+                        <label for="email">email :</label>
+                        <input type="text" class="form-control" id="email" name="email" required value=" {{ $user->email }}">
+                      </div>
+                    
+                  </form>
 
 
-                </table>
+
+
             </div>
             <!-- End of Main Content -->
 
@@ -394,6 +344,7 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Creer par &copy;ISLAM,DOUAE,MOHAMED</span>
+
                     </div>
                 </div>
             </footer>
@@ -424,7 +375,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>
@@ -437,6 +388,15 @@
     <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
+
+    <script>document.addEventListener('DOMContentLoaded', function() {
+        const body = document.querySelector('body');
+        const toggleDarkModeButton = document.querySelector('#toggle-dark-mode');
+    
+        toggleDarkModeButton.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+        });
+    });</script>
 
 </body>
 

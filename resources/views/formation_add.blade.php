@@ -14,67 +14,36 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <link href="{{ asset('import/css/sb-admin-2.min.css') }}" rel="stylesheet">
-<script src="{{ asset('import/js/vendor/fontawesome-free/js/all.min.js') }}"></script>
+    <script src="{{ asset('import/js/vendor/fontawesome-free/js/all.min.js') }}"></script>
+
+
 
     <style>
-        body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
+         .form-container {
+      max-width: 500px;
+      margin: auto;
+      margin-top: 50px;
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+    .card {
+      border-radius: 15px;
     }
-
-    th, td {
-      padding: 10px;
+    .card-header {
+      border-radius: 15px 15px 0 0;
+    }
+    .form-group {
       text-align: center;
-      border-bottom: 1px solid #ddd;
     }
-
-    th {
-      background-color: #d5cece;
-      color: #fff;
-    }
-
-    tr:hover {
-      background-color: #f2f2f2;
-    }
-
-    .confirm-btn, .reject-btn {
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .confirm-btn {
-      background-color: #5cb85c;
-      color: #fff;
-    }
-
-    .confirm-btn:hover {
-      background-color: #4cae4c;
-    }
-
-    .reject-btn {
-      background-color: #d9534f;
-      color: #fff;
-    }
-
-    .reject-btn:hover {
-      background-color: #c9302c;
-    }
+ .title{
+    margin-left: 20px;
+ }
+  
 
 
+ #btn_aj{
+    width: 400px
+ }
 
-
-    </style>
+      </style>
 
 </head>
 
@@ -109,7 +78,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                   Espace Personnels
+                  Espace  Personnels
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -151,7 +120,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                  Espace  Services
+                   Espace Services
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -174,7 +143,7 @@
     
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('show_conge')}}">
+                    <a class="nav-link" href="{{ route('show_conge') }}">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Conge</span></a>
                 </li>
@@ -215,7 +184,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                 <h3>BC SKILLS</h3>
+                    <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -258,7 +227,8 @@
                                 <h6 class="dropdown-header">
                                    Notifications
                                 </h6>
-                                @foreach($derniereformations as $shformations)
+                               <!-- Inclure la vue partielle notif_formation avec la variable $formations -->
+                               @foreach($derniereformations as $shformations)
                                <a class="dropdown-item d-flex align-items-center" href="#">
                                    <div class="mr-3">
                                        <div class="icon-circle bg-primary">
@@ -271,23 +241,23 @@
                                    </div>
                                </a>
                            @endforeach
-                          
-                            <div>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
+
+                                  <!-- Autres éléments de votre dropdown -->
+                                  <div>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-success">
+                                                <i class="fas fa-donate text-white"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        @if($derniereConge)
-                                            <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
-                                            <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
-                                        @else
-                                            <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
-                                        @endif
-                                    </div>
-                                </a>
+                                        <div>
+                                            @if($derniereConge)
+                                                <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
+                                                <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
+                                            @else
+                                                <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
+                                            @endif
+                                        </div>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -313,7 +283,8 @@
 
                                   
                             @endif
-                                <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
+                                
+            <img src="{{ asset('import/img/islam.jpeg') }}" class="img-profile rounded-circle" alt="Logo">
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -330,7 +301,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('Rlogin')}}" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Se deconnecter
+                                    Logout
                                 </a>
                             </div>
                         </li>
@@ -344,48 +315,78 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Demande Conge</h1>
+                    <h1 class="h3 mb-4 text-gray-800">ajouter Formation</h1>
 
                 </div>
                 <!-- /.container-fluid -->
-                <table>
-                    <thead>
-                      <tr>
-                     
-                        <th>Nom Employé</th>
-                        <th>Date Début</th>
-                        <th>Date Fin</th>
-                        <th>Motif</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                       
-                          <th>Nom Employé</th>
-                          <th>Date Début</th>
-                          <th>Date Fin</th>
-                          <th>Motif</th>
-                          <th>Action</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($demandesConge as $demande)
-                            <tr>
-                                <td>{{ $demande->first_name }} {{ $demande->laste_name }}</td>
-                                <td>{{ $demande->start_date }}</td>
-                                <td>{{ $demande->end_date }}</td>
-                                <td>{{ $demande->comment }}</td>
-                                <td>
-                                  <a href="{{ route('conge_confirmer', ['id' => $demande->id]) }}"> <button class="confirm-btn">Confirmer</button></a>
-                                  <a href="{{ route('conge_rejeter', ['id' => $demande->id]) }}"> <button class="reject-btn">Rejeter</button></a>
-                                  </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+                <form action="{{ route('formations.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="title">
+                        <label for="titre">Titre :</label>
+                        <input type="text" class="form-control" id="titre" name="titre" required>
+                        @error('titre')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="title">
+                        <label for="description">Description :</label>
+                        <input type="text" class="form-control" id="description" name="description" required>
+                        @error('description')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="title">
+                        <label for="date_debut">Date Debut :</label>
+                        <input type="date" class="form-control" id="date_debut" name="date_debut" required>
+                        @error('date_debut')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="title">
+                        <label for="date_fin">Date Fin :</label>
+                        <input type="date" class="form-control" id="date_fin" name="date_fin" required>
+                        @error('date_fin')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="title">
+                        <label for="lieu">Lieu :</label>
+                        <input type="text" class="form-control" id="lieu" name="lieu" required>
+                        @error('lieu')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex justify-content-center mt-3">
+                                <button type="submit" class="btn btn-primary form-control" id="btn_aj">Ajouter</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+                
+                @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
+                
 
 
-                </table>
+
+
             </div>
             <!-- End of Main Content -->
 
@@ -394,6 +395,7 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Creer par &copy;ISLAM,DOUAE,MOHAMED</span>
+
                     </div>
                 </div>
             </footer>
@@ -429,7 +431,6 @@
             </div>
         </div>
     </div>
-
     <script src="{{ asset('import/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('import/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('import/vendor/jquery-easing/jquery.easing.min.js') }}"></script>

@@ -11,70 +11,41 @@
 
     <title>SB Admin 2 - Blank</title>
 
+    <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <link href="{{ asset('import/css/sb-admin-2.min.css') }}" rel="stylesheet">
 <script src="{{ asset('import/js/vendor/fontawesome-free/js/all.min.js') }}"></script>
 
     <style>
-        body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
+         .form-container {
+      max-width: 500px;
+      margin: auto;
+      margin-top: 50px;
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+    .card {
+      border-radius: 15px;
     }
-
-    th, td {
-      padding: 10px;
+    .card-header {
+      border-radius: 15px 15px 0 0;
+    }
+    .form-group {
       text-align: center;
-      border-bottom: 1px solid #ddd;
+    }*
+    .title{
+        margin-left: 20px;
     }
-
-    th {
-      background-color: #d5cece;
-      color: #fff;
-    }
-
-    tr:hover {
-      background-color: #f2f2f2;
-    }
-
-    .confirm-btn, .reject-btn {
-      padding: 5px 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .confirm-btn {
-      background-color: #5cb85c;
-      color: #fff;
-    }
-
-    .confirm-btn:hover {
-      background-color: #4cae4c;
-    }
-
-    .reject-btn {
-      background-color: #d9534f;
-      color: #fff;
-    }
-
-    .reject-btn:hover {
-      background-color: #c9302c;
+    .bg{
+        background-color: #7093fa;
     }
 
 
 
+    #btn_aj{
+        width: 400px;
+    }
 
-    </style>
+      </style>
 
 </head>
 
@@ -84,14 +55,14 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg sidebar sidebar-dark accordion" id="accordionSidebar">
             <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo">
 
            
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                
-                    <div class="sidebar-brand-text mx-3"><h4><i class="fas fa-bars"></i> Menu RH</h4></div>
+                    <div class="sidebar-brand-text mx-3"><h4><i class="fas fa-bars"></i>Menu Stageaire </h4></div>
             </a>
 
             <!-- Divider -->
@@ -99,93 +70,66 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('homepage') }}">
+                <a class="nav-link" href="{{ route('dashboard_stg') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Tableau de bord</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-    
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                   Espace Personnels
-                </div>
-    
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-user"></i>
-                        <span>Employes</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Operations:</h6>
-                            <a class="collapse-item" href="{{ route('employes_show') }}">Consulter Employes</a>
-                            <a class="collapse-item" href="{{ route('employes_add') }}">Ajouter Employes</a>
-                        </div>
-                    </div>
-                </li>
-    
-                <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-user-graduate"></i>
-                        <span>Stageaires</span>
-                    </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Operations</h6>
-                            <a class="collapse-item" href="{{ route('stageaires_show') }}">Consulter Stageaires</a>
-                            <a class="collapse-item" href="{{ route('stageaires_add') }}">Ajouter Stageaires</a>
-                            
-                        </div>
-                    </div>
-                </li>
-    
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-    
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                  Espace  Services
-                </div>
-    
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ route('formation') }}" data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <span>Formation</span>
-                    </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Formation </h6>
-                            <a class="collapse-item" href="{{ route('formation') }}">Consulter Formation</a>
-                            <a class="collapse-item" href="{{ route('formation_add') }}">Ajouter Formation</a>
-
-                            
-                        </div>
-                    </div>
-                </li>
-    
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('show_conge')}}">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Conge</span></a>
-                </li>
-    
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="buttons.html">
-                    <i class="fas fa-user-clock"></i>
-                    <span>Abscence</span></a>
             </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Espace Personnel
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-user"></i>
+                    <span>Mes informations</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Operations:</h6>
+                        <a class="collapse-item" href="{{route('show_per')}}">Consulter Mes informations</a>
+                        <a class="collapse-item" href="{{route('edit_per')}}">Modifier Mes informations</a>
+                    </div>  
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+          
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Espace Services
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Espace Formations</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Formation </h6>
+                        <a class="collapse-item" href="{{ route('formation_stg')}}">Mes formations</a>
+                        <a class="collapse-item" href="{{ route('prochain_formation_stg')}}">prochain formation</a>
+                        
+                        
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+           
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -215,7 +159,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                 <h3>BC SKILLS</h3>
+                   <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -271,8 +215,6 @@
                                    </div>
                                </a>
                            @endforeach
-                          
-                            <div>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
@@ -280,12 +222,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        @if($derniereConge)
-                                            <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
-                                            <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
-                                        @else
-                                            <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
-                                        @endif
+                                        <div class="small text-gray-500">Avril 29, 2024</div>
+                                        <span class="font-weight-bold">   Formation de Marketing Digital
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -314,7 +252,6 @@
                                   
                             @endif
                                 <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
-
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -341,52 +278,51 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Demande Conge</h1>
-
+               
+<div class="container">
+    <h1>Modifier Profil {{ $user->first_name }} {{ $user->last_name }}</h1>
+    <form action="{{ route('update_per', ['id' => $user->id]) }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <!-- Ajoutez les champs de formulaire nécessaires pour le profil stagiaire -->
+        <div class="title">
+            <label for="nom">Nom :</label>
+            <input type="text" class="form-control" id="nom" name="nom" required value="{{ $user->first_name }}">
+        </div>
+        <div class="title">
+            <label for="prenom">Prénom :</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" required value="{{ $user->last_name }}">
+        </div>
+        <div class="title">
+            <label for="phone">Numero de Téléphone :</label>
+            <input type="text" class="form-control" id="phone" name="phone" required value="{{ $user->phone }}">
+        </div>
+        <div class="title">
+            <label for="email">Email :</label>
+            <input type="text" class="form-control" id="email" name="email" required value="{{ $user->email }}">
+        </div>
+        <div class="title">
+            <label for="Tuteur">Tuteur :</label>
+            <input type="text" class="form-control" id="Tuteur" name="Tuteur" required value="{{ $user->Tuteur }}">
+        </div>
+        <div class="title">
+            <label for="Mission">Mission :</label>
+            <input type="text" class="form-control" id="Mission" name="Mission" required value="{{ $user->Mission }}">
+        </div>
+        <div class="title">
+            <label for="Duree_de_stage">dure de stage :</label>
+            <input type="text" class="form-control" id="Duree_de_stage" name="Duree_de_stage" required value="{{ $user->Duree_de_stage }}">
+        </div>
+        <!-- Ajoutez les autres champs spécifiques aux stagiaires -->
+        <p><i class="fas fa-exclamation-triangle attention-icon"></i>Attention vos données seront modifiées dans la base de données</p>
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-primary form-control" id="btn_aj">Modifier</button>
                 </div>
-                <!-- /.container-fluid -->
-                <table>
-                    <thead>
-                      <tr>
-                     
-                        <th>Nom Employé</th>
-                        <th>Date Début</th>
-                        <th>Date Fin</th>
-                        <th>Motif</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                       
-                          <th>Nom Employé</th>
-                          <th>Date Début</th>
-                          <th>Date Fin</th>
-                          <th>Motif</th>
-                          <th>Action</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($demandesConge as $demande)
-                            <tr>
-                                <td>{{ $demande->first_name }} {{ $demande->laste_name }}</td>
-                                <td>{{ $demande->start_date }}</td>
-                                <td>{{ $demande->end_date }}</td>
-                                <td>{{ $demande->comment }}</td>
-                                <td>
-                                  <a href="{{ route('conge_confirmer', ['id' => $demande->id]) }}"> <button class="confirm-btn">Confirmer</button></a>
-                                  <a href="{{ route('conge_rejeter', ['id' => $demande->id]) }}"> <button class="reject-btn">Rejeter</button></a>
-                                  </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-
-
-                </table>
             </div>
+        </div>
+    </form>
+</div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -394,6 +330,7 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Creer par &copy;ISLAM,DOUAE,MOHAMED</span>
+
                     </div>
                 </div>
             </footer>
@@ -424,7 +361,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>

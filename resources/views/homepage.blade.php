@@ -9,6 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <style>
+.accordion{
+    background-color: #aac4f3;
+}
+
+
+
+    </style>
+
     
     <title> Dashboard</title>
 
@@ -26,6 +35,7 @@
 
 
 
+
     
     
 
@@ -34,10 +44,10 @@
 <body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div id="wrapper" >
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary  sidebar sidebar-dark accordion" id="accordionSidebar">
             <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo">
            
             <!-- Sidebar - Brand -->
@@ -55,7 +65,7 @@
                     <a class="nav-link" href="{{ route('homepage') }}">
 
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Tableau de bord</span></a>
             </li>
 
             <!-- Divider -->
@@ -63,7 +73,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Personnel
+               Espace Personnels
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -105,7 +115,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Services
+                Espace Services
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -118,9 +128,9 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Formation proche</h6>
-                        <a class="collapse-item" href="{{ route('formation') }}">Html & Css</a>
-                        <a class="collapse-item" href="{{ route('formation') }}">soft skills</a>
-                        <a class="collapse-item" href="{{ route('formation') }}">Ecommerce</a>
+                        <a class="collapse-item" href="{{ route('formation') }}">Consulter Formation</a>
+                        <a class="collapse-item" href="{{ route('formation_add') }}">Ajouter Formation</a>
+
                         
                     </div>
                 </div>
@@ -128,7 +138,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('conge') }}">
+                <a class="nav-link" href="{{ route('show_conge') }}">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Conge</span></a>
             </li>
@@ -168,18 +178,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                   <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -222,28 +221,34 @@
                                 <h6 class="dropdown-header">
                                    Notifications
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
+                                @foreach($derniereformations as $shformations)
+                               <a class="dropdown-item d-flex align-items-center" href="#">
+                                   <div class="mr-3">
+                                       <div class="icon-circle bg-primary">
+                                           <i class="fas fa-file-alt text-white"></i>
+                                       </div>
+                                   </div>
+                                   <div>
+                                       <div class="small text-gray-500">{{ $shformations->date_debut }}</div>
+                                       <span class="font-weight-bold">Une nouvelle formation ajoutée : {{ $shformations->titre }}</span>
+                                   </div>
+                               </a>
+                           @endforeach
+                           <div>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500">Mai 02, 2024</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">Avril 29, 2024</div>
-                                        <span class="font-weight-bold">   Formation de Marketing Digital
-                                    </div>
-                                </a>
+                                </div>
+                                <div>
+                                    @if($derniereConge)
+                                        <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
+                                        <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
+                                    @else
+                                        <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
+                                    @endif
+                                </div>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -264,7 +269,11 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.Islam</span>
+                                @if(session('userName'))
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.   {{ session('userName') }}</span>
+
+                                  
+                            @endif
             <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
                             
                             </a>
@@ -277,12 +286,12 @@
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{route('Rlogin')}}" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    se deconnecter
                                 </a>
                             </div>
                         </li>
@@ -297,9 +306,9 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Tableau de bord</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                                class="fas fa-download fa-sm text-white-50"></i> Generer Rapport</a>
                     </div>
 
                     <!-- Content Row -->
@@ -313,7 +322,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Employes (Actives)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">32 Membres</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$employeeCount}} Membres</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user-tie fa-fw"></i>
@@ -330,8 +339,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Stageaire (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">20 % Membres </div>
+                                                Stageaires (Actives)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$stagiaireCount}} Membres </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user-graduate fa-fw"></i>
@@ -351,15 +360,9 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">2/mois</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$formationCount}} Formations</div>
                                                 </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -378,7 +381,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Demande Conge</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$demandeCongeCount}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-umbrella-beach fa-fw"></i>
@@ -415,45 +418,19 @@
                                 </div>
                         
                                 <!-- Project Card Example -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Taut D inscription Au Formation Ecommerce</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <h4 class="small font-weight-bold">Pourcentage de Personnel <span class="float-right">20%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <!-- Ajoutez d'autres projets et barres de progression ici si nécessaire -->
-                                    </div>
-                                </div>
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Taut D inscription Au Formation Marketing</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <h4 class="small font-weight-bold">Pourcentage de Personnel <span class="float-right">35%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 35%"
-                                                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <!-- Ajoutez d'autres projets et barres de progression ici si nécessaire -->
+                                @foreach($formationsInscrites as $formationInscrite)
+                                <h4 class="small font-weight-bold">
+                                     Pourcentage d'inscription au formation de  {{ $formationInscrite['formation']->titre }}
+                                    <span class="float-right">{{ number_format($formationInscrite['pourcentageInscription'], 2) }}%</span>
+                                </h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                         style="width: {{ number_format($formationInscrite['pourcentageInscription'], 2) }}%"
+                                         aria-valuenow="{{ number_format($formationInscrite['pourcentageInscription'], 2) }}"
+                                         aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                 </div>
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Taut D inscription Au Formation Soft Skills</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <h4 class="small font-weight-bold">Pourcentage de Personnel <span class="float-right">70%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 70%"
-                                                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <!-- Ajoutez d'autres projets et barres de progression ici si nécessaire -->
-                                    </div>
-                                </div>
+                            @endforeach
 
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
@@ -464,11 +441,13 @@
                                             <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo" width="250px">
 
                                         </div>
-                                        <p>Add some quality, svg illustrations to your project courtesy of <a
-                                                target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated
-                                            collection of beautiful svg images that you can use completely free and without attribution!</p>
-                                        <a target="_blank" rel="nofollow" href="https://www.bcskills.com/">Browse Illustrations on unDraw &rarr;</a>
+                                        <p>Ajoutez des illustrations svg de qualité à votre projet grâce à <a
+                                                target="_blank" rel="nofollow" href="https://undraw.co/"> unDraw</a>, une collection constamment mise à jour de belles images svg que vous pouvez utiliser gratuitement et sans attribution !</p>
+                                        <a target="_blank" rel="nofollow" href="https://www.bcskills.com/">Parcourir les illustrations sur unDraw → &rarr;</a>
                                     </div>
+                                   
+
+
                                 </div>
                         
                             </div>

@@ -96,6 +96,156 @@ body {
           box-shadow:#aaa ;
         
   }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+.formation-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.formation-card h3 {
+    margin: 0 0 10px;
+    color: #2a57de;
+}
+
+.formation-card p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.details-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.details-btn:hover {
+    background-color: #0056b3;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.eliminer_la_decoration {
+    width: 250px;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+
+.eliminer_la_decoration {
+           
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .cl{
+            background-color: red;
+        }
+        .sp{
+            margin-top: 10px
+        }
 
     </style>
 
@@ -124,7 +274,7 @@ body {
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('homepage') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Tableau de bord</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -132,7 +282,7 @@ body {
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Personnel
+                   Espace Personnels
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -174,7 +324,7 @@ body {
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Services
+                   Espace Services
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -186,10 +336,9 @@ body {
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Formation proche</h6>
-                            <a class="collapse-item" href="{{ route('formation') }}">Html & Css</a>
-                            <a class="collapse-item" href="{{ route('formation') }}">soft skills</a>
-                            <a class="collapse-item" href="{{ route('formation') }}">Ecommerce</a>
+                            <h6 class="collapse-header">Formation </h6>
+                            <a class="collapse-item" href="{{ route('formation') }}">Consulter Formation</a>
+                            <a class="collapse-item" href="{{ route('formation_add') }}">Ajouter Formation</a>
                             
                         </div>
                     </div>
@@ -197,7 +346,7 @@ body {
     
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('conge') }}">
+                    <a class="nav-link" href="{{ route('show_conge') }}">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Conge</span></a>
                 </li>
@@ -238,18 +387,7 @@ body {
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -292,6 +430,7 @@ body {
                                 <h6 class="dropdown-header">
                                    Notifications
                                 </h6>
+                                @foreach($derniereformations as $shformations)
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
@@ -299,10 +438,12 @@ body {
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Mai 02, 2024</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <div class="small text-gray-500">{{ $shformations->date_debut }}</div>
+                                        <span class="font-weight-bold">Une nouvelle formation ajoutée : {{ $shformations->titre }}</span>
                                     </div>
                                 </a>
+                            @endforeach
+                            <div>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
@@ -310,10 +451,13 @@ body {
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Avril 29, 2024</div>
-                                        <span class="font-weight-bold">   Formation de Marketing Digital
+                                        @if($derniereConge)
+                                            <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
+                                            <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
+                                        @else
+                                            <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
+                                        @endif
                                     </div>
-                                </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -334,7 +478,11 @@ body {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.Islam</span>
+                                @if(session('userName'))
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.   {{ session('userName') }}</span>
+
+                                  
+                            @endif
                                 <img src="{{ asset('import/img/islam.jpeg') }}"  class="img-profile rounded-circle" alt="Logo" width="20px">
 
                             </a>
@@ -347,12 +495,12 @@ body {
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{route('Rlogin')}}" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    se deconnecter
                                 </a>
                             </div>
                         </li>
@@ -367,128 +515,138 @@ body {
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Listes de formations</h1>
+                    <main>
+                        <h2> Formations</h2>
+                        @foreach($formations as $formation)
+                            <div class="formation-card">
+                                <h3><strong>Formation de {{ $formation->titre }}</strong> </h3>
+                                <p><strong>Date Debut: </strong>{{ $formation->date_debut }}</p>
+                                <p><strong>Date Fin: </strong>{{ $formation->date_fin}}</p>
+                                <p><strong>Lieu : </strong>{{ $formation->lieu}}</p>
+                                <p><strong>description : </strong><p> {{ $formation->description }}</p></p>
 
+                                
+                                <a href="{{ route('formation_edit', $formation->id) }}" class="btn btn-primary eliminer_la_decoration">Modifier</a>
+
+                                <a href="{{ route('formations.listeUtilisateurs', $formation->id) }}"
+                                    class="btn btn-success eliminer_la_decoration">Consulter Employés</a>
+                                    <a href="{{ route('delete_formation', $formation->id) }}"  class="btn btn-danger  eliminer_la_decoration">Annuler</a>
+                            </div>
+                            <div class="modal fade" id="modalConfirm-{{ $formation->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="modalConfirmLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalConfirmLabel">Confirmation</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Êtes-vous sûr de vouloir supprimer cette formation ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                            <a href="{{ route('delete_formation', ['id' => $formation->id]) }}"
+                                                class="btn btn-danger">Confirmer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </main>
+            
                 </div>
-                <!-- /.container-fluid -->
-                <main>
-                    <h2>Liste des Formations</h2>
-                    <div class="formation-card">
-                      <h3>Formation HTML et CSS</h3>
-                      <p>Durée : 2 semaines</p>
-                      <p>Date : 15/06/2024</p>
-                      <button class="details-btn">Voir Détails</button>
-                    </div>
-                   
-                    <div class="formation-card">
-                        <h3>Formation Soft Skills</h3>
-                        <p>Durée : 1 semaine</p>
-                        <p>Date : 20/05/2024</p>
-                        <button class="details-btn">Voir Détails</button>
-  
-                    </div>
-                    <div class="formation-card">
-                        <h3>Formation Ecommmerce</h3>
-                        <p>Durée : 5 jours</p>
-                        <p>Date : 10/06/2024</p>
-                        <button class="details-btn">Voir Détails</button>
-  
-                   
-
-                  
-                    </div>
-                </main>
-                 
-                
-                  <div class="modal">
+            
+                <div class="modal" id="detailsModal">
                     <div class="modal-content">
-                      <span class="close">&times;</span>
-                      <h2>Détails de la Formation</h2>
-                      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime eos beatae minima, vitae vero odit corporis exercitationem totam veritatis repudiandae libero dignissimos dolorem eveniet voluptatem nesciunt atque. Pariatur, ipsam repudiandae.</p>
-                      <a href="update_formation.html" ><button class="eliminer_la_decoration">Modifier</button></a>
-                      <a href="show_per_form.html" > <button class="eliminer_la_decoration">consulter employes</button> </a>
-                      <a href="delete_formation.html" ><button class="eliminer_la_decoration">Annuler</button></a>
-
+                        <span class="close">&times;</span>
+                        <h2>Détails de la Formation</h2>
+                        <p id="modal-description">{{ $formation->description }}</p>
+                        <a href="{{ route('formation_edit', $formation->id) }}"><button class="eliminer_la_decoration">Modifier</button></a>
+                        <a href="{{ route('formations.listeUtilisateurs', $formation->id) }}"><button class="eliminer_la_decoration">Consulter Employés</button></a>
+                        <a href="#" onclick=""><button class="eliminer_la_decoration details-btn cl">Annuler</button></a>
                     </div>
-                </div>
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Creer par &copy;ISLAM,DOUAE,MOHAMED</span>
                     </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+                    
+                    </div>
+                    <!-- End of Main Content -->
+                    
+                    <!-- Footer -->
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Creer par &copy;ISLAM,DOUAE,MOHAMED</span>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
+                    
+                    </div>
+                    <!-- End of Content Wrapper -->
+                    
+                    </div>
+                    <!-- End of Page Wrapper -->
+                    
+                    <!-- Scroll to Top Button-->
+                    <a class="scroll-to-top rounded" href="#page-top">
+                        <i class="fas fa-angle-up"></i>
+                    </a>
+                    
+                    <!-- Logout Modal-->
+                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                    <a class="btn btn-primary" href="#">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="{{ asset('import/vendor/jquery/jquery.min.js') }}"></script>
+                    <script src="{{ asset('import/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+                    <script src="{{ asset('import/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+                    <script src="{{ asset('import/js/sb-admin-2.min.js') }}"></script>
+                    <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
+                    <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
+                    <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
+                    <script src="js/sb-admin-2.min.js"></script>
+                    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const cancelLinks = document.querySelectorAll('.cancel-link');
+                            cancelLinks.forEach(link => {
+                                link.addEventListener('click', function (event) {
+                                    event.preventDefault();
+                                    const modalId = this.getAttribute('data-target');
+                                    const modal = document.querySelector(modalId);
+                                    if (modal) {
+                                        modal.classList.remove('show'); // Retire la classe 'show' pour masquer le modal
+                                        setTimeout(() => { // Utilise setTimeout pour retarder la suppression du modal
+                                            modal.style.display = 'none'; // Masque le modal
+                                            const backdrop = document.querySelector('.modal-backdrop');
+                                            if (backdrop) {
+                                                backdrop.remove(); // Supprime le fond gris
+                                            }
+                                        }, 200); // Temps de retard en millisecondes
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                    
+                    </body>
+                    </html>
 
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="{{ asset('import/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('import/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('import/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('import/js/sb-admin-2.min.js') }}"></script>
-    <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
-    <script src="js/sb-admin-2.min.js"></script>
-
-    
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const modal = document.querySelector('.modal');
-      const modalCloseBtn = document.querySelector('.modal .close');
-      const detailsBtns = document.querySelectorAll('.details-btn');
-
-      detailsBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          modal.style.display = 'block';
-        });
-      });
-
-      modalCloseBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-      });
-
-      window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-          modal.style.display = 'none';
-        }
-      });
-    });
-  </script>
-
-</body>
-
-</html>
+                   
+         

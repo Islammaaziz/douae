@@ -54,7 +54,7 @@
         .tit{
             margin-bottom: 30px;
         }
-        .add-circle-btn {
+         .add-circle-btn {
     width: 50px; /* Ajustez la taille du cercle selon vos besoins */
     height: 50px;
     border-radius: 50%; /* Pour créer un cercle */
@@ -85,23 +85,27 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="p-5">
-                          
+                            
                             <div class="text-center">
+                                <h1>$$$</h1>
                                 <h1 class="h4 text-gray-900 mb-4">Créez un compte !</h1>
-                                <div class="logo-container">
+
+                                  <div class="logo-container">
                                     <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo">
                                 </div>
-                                <h1 class="h4 text-gray-900 mb-4">Créez un compte !<h3 class="tit">Employe</h3></h1> 
+                                <h1 class="h4 text-gray-900 mb-4">Créez un compte !<h3 class="tit">Stageaire</h3></h1> 
                             </div>
                
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register_stg') }}">
         @csrf
         <div>
             <div class="logo-container">
-                <button type="button" class="add-circle-btn" id="add-photo-btn">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
+                
+           
+                <button class="add-circle-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" class="form-control form-control-user" id="exampleFirstName"
@@ -124,22 +128,30 @@
         <div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" id="poste" name="poste" class="form-control form-control-user" 
-            placeholder="poste">
-            @error('poste')
+                    <input type="text" id="Tuteur" name="Tuteur" class="form-control form-control-user" id="exampleFirstName"
+            placeholder="Tuteur">
+            @error('Tuteur')
                 <span class="danger">{{ $message }}</span>
             @enderror
                 </div>
                 <div class="col-sm-6">
-                    <input type="text" id="departement" name="departement"  class="form-control form-control-user"
-                    placeholder="departement">
-                    @error('departement')
+                    <input type="text" id="Duree de stage" name="Duree de stage"  class="form-control form-control-user" id="exampleLastName"
+                    placeholder="Duree de stage">
+                    @error('Duree de stage')
                         <span class="danger">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
+            <div class="form-group">
+                <input  id="Mission" name="Mission"  class="form-control form-control-user" id="exampleInputEmail"
+                placeholder="Mission">
+                @error('Mission')
+                    <span class="danger">{{ $message }}</span>
+                @enderror
+            </div>
            
         </div>
+
         <div class="form-group">
             
             <div class="input-group">
@@ -149,7 +161,6 @@
                 <input type="text" id="phone" name="phone" class="form-control" placeholder="numero de telephone" required>
             </div>
         </div>
-
 
         <div class="form-group">
             <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control form-control-user" id="exampleInputEmail"
@@ -162,21 +173,18 @@
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <input type="password" id="password" name="password" class="form-control form-control-user"
-                id="exampleInputPassword" placeholder="Mot de passe">
+                id="exampleInputPassword" placeholder="mots de passe ">
                 @error('password')
                     <span class="danger">{{ $message }}</span>
                 @enderror
             </div>
             <div class="col-sm-6">
                 <input type="password" id="password_confirmation" name="password_confirmation" class="form-control form-control-user"
-                id="exampleRepeatPassword" placeholder="Repete Mot de passe">
+                id="exampleRepeatPassword" placeholder="Repeter mots de passe">
             </div>
         </div>
 
-       
-       
         <button type="submit" class="btn btn-primary btn-user btn-block">Registre</button>
-       
 
     </form>
                             
@@ -186,7 +194,7 @@
                                 <a class="small" href="{{ route('Rlogin') }}">Vous avez déjà un compte ? Connectez-vous!</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{{ route('signup_stg') }}">registrer en tant que stageaire</a>
+                                <a class="small" href="{{ route('signup') }}">registrer en tant que Employe</a>
                             </div>
                         </div>
                     </div>
@@ -202,27 +210,6 @@
     <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
-   
-<script>
-    document.getElementById('add-photo-btn').addEventListener('click', function() {
-        // Crée dynamiquement un input type="file"
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*'; // Accepter uniquement les images
-
-        // Déclenche l'ouverture du sélecteur de fichiers
-        fileInput.click();
-
-        // Optionnel : Vous pouvez ajouter un événement de changement pour gérer le fichier sélectionné
-        fileInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                console.log('Fichier sélectionné :', file.name);
-                // Vous pouvez ajouter ici le code pour prévisualiser ou télécharger le fichier
-            }
-        });
-    });
-</script>
 </body>
 
 </html>

@@ -44,7 +44,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('homepage') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Tableau de bord</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -52,7 +52,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Personnel
+                   Espace Personnels
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -94,7 +94,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Services
+                   Espace Services
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -107,9 +107,9 @@
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Formation proche</h6>
-                            <a class="collapse-item" href="{{ route('formation') }}">Html & Css</a>
-                            <a class="collapse-item" href="{{ route('formation') }}">soft skills</a>
-                            <a class="collapse-item" href="{{ route('formation') }}">Ecommerce</a>
+                            <a class="collapse-item" href="{{ route('formation') }}">Consulter Formation</a>
+                            <a class="collapse-item" href="{{ route('formation_add') }}">Ajouter Formation</a>
+
                             
                         </div>
                     </div>
@@ -117,7 +117,7 @@
     
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('conge') }}">
+                    <a class="nav-link" href="{{ route('show_conge') }}">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Conge</span></a>
                 </li>
@@ -158,18 +158,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -212,6 +201,7 @@
                                 <h6 class="dropdown-header">
                                    Notifications
                                 </h6>
+                                @foreach($derniereformations as $shformations)
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
@@ -219,10 +209,12 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Mai 02, 2024</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <div class="small text-gray-500">{{ $shformations->date_debut }}</div>
+                                        <span class="font-weight-bold">Une nouvelle formation ajoutée : {{ $shformations->titre }}</span>
                                     </div>
                                 </a>
+                            @endforeach
+                            <div>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
@@ -230,10 +222,13 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Avril 29, 2024</div>
-                                        <span class="font-weight-bold">   Formation de Marketing Digital
+                                        @if($derniereConge)
+                                            <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
+                                            <span class="font-weight-bold">le status de dernier demande congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
+                                        @else
+                                            <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
+                                        @endif
                                     </div>
-                                </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -254,7 +249,11 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.Islam</span>
+                                @if(session('userName'))
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.   {{ session('userName') }}</span>
+
+                                  
+                            @endif
                                 <img src="{{ asset('import/img/islam.jpeg') }}" class="img-profile rounded-circle" alt="Logo">
 
                             </a>
@@ -267,12 +266,12 @@
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{route('Rlogin')}}" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Se deconnecter
                                 </a>
                             </div>
                         </li>
@@ -286,25 +285,25 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                 <h5>   <p class="mb-4"> <div>cette DataTables contient les employes qui sont actuellement actifs </div></h5>
-                        <i class="fas fa-exclamation-circle"></i> Si Vous voulez consultez des anciens employes veuillez cliquez sur<a target="_blank" href="https://datatables.net">Employes archivees</a>.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Tables Stageiares</h1>
+                 <h5>   <p class="mb-4"> <div>cette DataTables contient les stageaires qui sont actuellement actifs </div></h5>
+                        <i class="fas fa-exclamation-circle"></i> Si Vous voulez consultez des anciens stageaires veuillez cliquez sur<a target="_blank" href="https://datatables.net">Stageaires archivees</a>.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">TABLE DES STAGEAIRES </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Nom</th>
                                             <th>Mission</th>
-                                            <th>Departement</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>Tuteur</th>
+                                            <th>Duree de stage</th>
+                                            <th>date debut</th>
                                             <th>Operations</th>
                                         </tr>
                                     </thead>
@@ -312,697 +311,27 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Mission</th>
-                                            <th>Departement</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>Tuteur</th>
+                                            <th>Duree de stage</th>
+                                            <th>numero de telephone</th>
                                             <th>Operations</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        @foreach($stagiaires as $stagiaire)
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>developpement app mobil GRH</td>
-                                            <td>Informatique</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                            <td>{{ $stagiaire->first_name }} {{ $stagiaire->last_name }}</td>
+                                            <td>{{ $stagiaire->Mission }}</td>
+                                            <td>{{ $stagiaire->Tuteur }}</td>
+                                            <td>{{ $stagiaire->Duree_de_stage }}</td>
+                                            <td>+212 {{ $stagiaire->phone }}</td>
                                             <td>
-                                                <a href="show_emp.html"><i class="fas fa-search"></i></a>
-                                                <a href="update_emp.html"><i class="fas fa-pencil-alt"></i></a>
-                                               <a href="archive_stg.html"> <i class="fas fa-archive"></i></a>
+                                                <a href="{{ route('show_stg', ['id' => $stagiaire->id]) }}"><i class="fas fa-search"></i></a>
+                                                <a href="{{ route('edit_stg', $stagiaire->id) }}"><i class="fas fa-pencil-alt"></i></a>
+                                               <a href="{{ route('delete_stg', ['id' => $stagiaire->id]) }}"  > <i class="fas fa-archive"></i></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>developpement ROBOT IA</td>
-                                            <td>indestruel</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>developpement systemes reseaux</td>
-                                            <td>indestruel</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>cyber securite</td>
-                                            <td>management</td>
-                                            <td>22</td>
-                                            <td>2012/03/29</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>developpement site web </td>
-                                            <td>Informatique</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>
-                                                <a href="show_stg.html"><i class="fas fa-search"></i></a>
-                                                <a href="update_stg.html"><i class="fas fa-pencil-alt"></i></a>
-                                                <a href="archive_stg.html"> <i class="fas fa-archive"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>control de qualite</td>
-                                            <td>61</td>
-                                            <td>2012/12/02</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Herrod Chandler</td>
-                                            <td>Sales Assistant</td>
-                                            <td>indestruel</td>
-                                            <td>59</td>
-                                            <td>2012/08/06</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rhona Davidson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>management</td>
-                                            <td>55</td>
-                                            <td>2010/10/14</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Colleen Hurst</td>
-                                            <td>Javascript Developer</td>
-                                            <td>management</td>
-                                            <td>39</td>
-                                            <td>2009/09/15</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sonya Frost</td>
-                                            <td>Software Engineer</td>
-                                            <td>control de qualite</td>
-                                            <td>23</td>
-                                            <td>2008/12/13</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jena Gaines</td>
-                                            <td>Office Manager</td>
-                                            <td>indestruel</td>
-                                            <td>30</td>
-                                            <td>2008/12/19</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Quinn Flynn</td>
-                                            <td>Support Lead</td>
-                                            <td>Informatique</td>
-                                            <td>22</td>
-                                            <td>2013/03/03</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Charde Marshall</td>
-                                            <td>Regional Director</td>
-                                            <td>management</td>
-                                            <td>36</td>
-                                            <td>2008/10/16</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Haley Kennedy</td>
-                                            <td>Senior Marketing Designer</td>
-                                            <td>indestruel</td>
-                                            <td>43</td>
-                                            <td>2012/12/18</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tatyana Fitzpatrick</td>
-                                            <td>Regional Director</td>
-                                            <td>control de qualite</td>
-                                            <td>19</td>
-                                            <td>2010/03/17</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Silva</td>
-                                            <td>Marketing Designer</td>
-                                            <td>management</td>
-                                            <td>66</td>
-                                            <td>2012/11/27</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Paul Byrd</td>
-                                            <td>Chief Financial Officer (CFO)</td>
-                                            <td>management</td>
-                                            <td>64</td>
-                                            <td>2010/06/09</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gloria Little</td>
-                                            <td>Systems Administrator</td>
-                                            <td>indestruel</td>
-                                            <td>59</td>
-                                            <td>2009/04/10</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bradley Greer</td>
-                                            <td>Software Engineer</td>
-                                            <td>control de qualite</td>
-                                            <td>41</td>
-                                            <td>2012/10/13</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dai Rios</td>
-                                            <td>Personnel Lead</td>
-                                            <td>informatique</td>
-                                            <td>35</td>
-                                            <td>2012/09/26</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jenette Caldwell</td>
-                                            <td>Development Lead</td>
-                                            <td>indestruel</td>
-                                            <td>30</td>
-                                            <td>2011/09/03</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Yuri Berry</td>
-                                            <td>Chief Marketing Officer (CMO)</td>
-                                            <td>informatique</td>
-                                            <td>40</td>
-                                            <td>2009/06/25</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Caesar Vance</td>
-                                            <td>Pre-Sales Support</td>
-                                            <td>informatique</td>
-                                            <td>21</td>
-                                            <td>2011/12/12</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Doris Wilder</td>
-                                            <td>Sales Assistant</td>
-                                            <td>management</td>
-                                            <td>23</td>
-                                            <td>2010/09/20</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Angelica Ramos</td>
-                                            <td>Chief Executive Officer (CEO)</td>
-                                            <td>indestruel</td>
-                                            <td>47</td>
-                                            <td>2009/10/09</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Joyce</td>
-                                            <td>Developer</td>
-                                            <td>management</td>
-                                            <td>42</td>
-                                            <td>2010/12/22</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Chang</td>
-                                            <td>Regional Director</td>
-                                            <td>indestruel</td>
-                                            <td>28</td>
-                                            <td>2010/11/14</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brenden Wagner</td>
-                                            <td>Software Engineer</td>
-                                            <td>indestruel</td>
-                                            <td>28</td>
-                                            <td>2011/06/07</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fiona Green</td>
-                                            <td>Chief Operating Officer (COO)</td>
-                                            <td>informatique</td>
-                                            <td>48</td>
-                                            <td>2010/03/11</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shou Itou</td>
-                                            <td>Regional Marketing</td>
-                                            <td>informatique</td>
-                                            <td>20</td>
-                                            <td>2011/08/14</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michelle House</td>
-                                            <td>Integration Specialist</td>
-                                            <td>management</td>
-                                            <td>37</td>
-                                            <td>2011/06/02</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suki Burks</td>
-                                            <td>Developer</td>
-                                            <td>control de qualite</td>
-                                            <td>53</td>
-                                            <td>2009/10/22</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Prescott Bartlett</td>
-                                            <td>Technical Author</td>
-                                            <td>indestruel</td>
-                                            <td>27</td>
-                                            <td>2011/05/07</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gavin Cortez</td>
-                                            <td>Team Leader</td>
-                                            <td>informatique</td>
-                                            <td>22</td>
-                                            <td>2008/10/26</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Martena Mccray</td>
-                                            <td>Post-Sales support</td>
-                                            <td>informatique</td>
-                                            <td>46</td>
-                                            <td>2011/03/09</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Unity Butler</td>
-                                            <td>Marketing Designer</td>
-                                            <td>indestruel</td>
-                                            <td>47</td>
-                                            <td>2009/12/09</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Howard Hatfield</td>
-                                            <td>Office Manager</td>
-                                            <td>control de qualite</td>
-                                            <td>51</td>
-                                            <td>2008/12/16</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hope Fuentes</td>
-                                            <td>Secretary</td>
-                                            <td>management</td>
-                                            <td>41</td>
-                                            <td>2010/02/12</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vivian Harrell</td>
-                                            <td>Financial Controller</td>
-                                            <td>indestruel</td>
-                                            <td>62</td>
-                                            <td>2009/02/14</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Timothy Mooney</td>
-                                            <td>Office Manager</td>
-                                            <td>informatique</td>
-                                            <td>37</td>
-                                            <td>2008/12/11</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jackson Bradshaw</td>
-                                            <td>Director</td>
-                                            <td>New York</td>
-                                            <td>65</td>
-                                            <td>2008/09/26</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Olivia Liang</td>
-                                            <td>Support Engineer</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2011/02/03</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bruno Nash</td>
-                                            <td>Software Engineer</td>
-                                            <td>London</td>
-                                            <td>38</td>
-                                            <td>2011/05/03</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sakura Yamamoto</td>
-                                            <td>Support Engineer</td>
-                                            <td>Tokyo</td>
-                                            <td>37</td>
-                                            <td>2009/08/19</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thor Walton</td>
-                                            <td>Developer</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>2013/08/11</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finn Camacho</td>
-                                            <td>Support Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>47</td>
-                                            <td>2009/07/07</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Serge Baldwin</td>
-                                            <td>Data Coordinator</td>
-                                            <td>Singapore</td>
-                                            <td>64</td>
-                                            <td>2012/04/09</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zenaida Frank</td>
-                                            <td>Software Engineer</td>
-                                            <td>New York</td>
-                                            <td>63</td>
-                                            <td>2010/01/04</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zorita Serrano</td>
-                                            <td>Software Engineer</td>
-                                            <td>San Francisco</td>
-                                            <td>56</td>
-                                            <td>2012/06/01</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hermione Butler</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2011/03/21</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lael Greer</td>
-                                            <td>Systems Administrator</td>
-                                            <td>London</td>
-                                            <td>21</td>
-                                            <td>2009/02/27</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jonas Alexander</td>
-                                            <td>Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>30</td>
-                                            <td>2010/07/14</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                            <td>
-                                                <i class="fas fa-search"></i>
-                                                <i class="fas fa-pencil-alt"></i>
-                                                <i class="fas fa-archive"></i>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -1064,6 +393,13 @@
     <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
+    <script>
+        function confirmDelete(stagiaireId, stagiaireName) {
+    if (confirm('Voulez-vous vraiment supprimer ' + stagiaireName + ' ?')) {
+        window.location.href = '{{ route('delete_stg', $stagiaire->id) }}'.replace(':id', stagiaireId);
+    }
+}
+    </script>
 
 </body>
 

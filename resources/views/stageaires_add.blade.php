@@ -38,11 +38,9 @@
   
 
 
-    #btn-aj{
-        width: 500px;
-    margin-left: 20px;
-
-    }
+ #btn_aj{
+    width: 400px
+ }
 
       </style>
 
@@ -71,7 +69,7 @@
                 <a class="nav-link" href="{{ route('homepage') }}">
 
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Tableau de bord</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -79,7 +77,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Personnel
+                   Espace Personnels
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -121,7 +119,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Services
+                   Espace Services
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -134,9 +132,9 @@
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Formation proche</h6>
-                            <a class="collapse-item" href="{{ route('formation') }}">Html & Css</a>
-                            <a class="collapse-item" href="{{ route('formation') }}">soft skills</a>
-                            <a class="collapse-item" href="{{ route('formation') }}">Ecommerce</a>
+                            <a class="collapse-item" href="{{ route('formation') }}">Consulter Formation</a>
+                            <a class="collapse-item" href="{{ route('formation_add') }}">Ajouter Formation</a>
+
                             
                         </div>
                     </div>
@@ -144,7 +142,7 @@
     
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('conge') }}">
+                    <a class="nav-link" href="{{ route('show_conge') }}">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Conge</span></a>
                 </li>
@@ -185,18 +183,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                   <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -239,6 +226,7 @@
                                 <h6 class="dropdown-header">
                                    Notifications
                                 </h6>
+                                @foreach($derniereformations as $shformations)
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
@@ -246,10 +234,12 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Mai 02, 2024</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <div class="small text-gray-500">{{ $shformations->date_debut }}</div>
+                                        <span class="font-weight-bold">Une nouvelle formation ajoutée : {{ $shformations->titre }}</span>
                                     </div>
                                 </a>
+                            @endforeach
+                            <div>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
@@ -257,10 +247,13 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Avril 29, 2024</div>
-                                        <span class="font-weight-bold">   Formation de Marketing Digital
+                                        @if($derniereConge)
+                                            <div class="small text-gray-500">{{ $derniereConge->start_date }}</div>
+                                            <span class="font-weight-bold">Votre dernier congé est {{ $derniereConge->status }} pour l employe {{ $derniereConge->first_name }} {{ $derniereConge->laste_name }}</span>
+                                        @else
+                                            <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
+                                        @endif
                                     </div>
-                                </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -281,7 +274,11 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.Islam</span>
+                                @if(session('userName'))
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.   {{ session('userName') }}</span>
+
+                                  
+                            @endif
                                 <img src="{{ asset('import/img/islam.jpeg') }}" class="img-profile rounded-circle" alt="Logo">
 
                             </a>
@@ -294,12 +291,12 @@
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{route('Rlogin')}}" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Se deconnecter
                                 </a>
                             </div>
                         </li>
@@ -317,41 +314,55 @@
 
                 </div>
                 <!-- /.container-fluid -->
-                <form action="traitement.php" method="post" enctype="multipart/form-data">
+                <form action="{{ route('ajouterStagiaire') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="title">
-                      <label for="nom">Nom :</label>
-                      <input type="text" class="form-control" id="nom" name="nom" required  >
+                        <label for="nom">Nom :</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" required>
                     </div>
                     <div class="title">
-                      <label for="prenom">Prénom :</label>
-                      <input type="text" class="form-control" id="prenom" name="prenom" required>
+                        <label for="prenom">Prénom :</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" required>
                     </div>
                     <div class="title">
-                      <label for="date_naissance">Date de naissance :</label>
-                      <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
+                        <label for="email">Email :</label>
+                        <input type="text" class="form-control" id="email" name="email" type="email" required>
+                    </div>
+                   
+                    <div class="title">
+                        <label for="Tuteur">Tuteur :</label>
+                        <input type="text" class="form-control" id="Tuteur" name="Tuteur" required>
                     </div>
                     <div class="title">
-                      <label for="poste">Missions :</label>
-                      <input type="text" class="form-control" id="poste" name="poste" required>
+                        <label for="Mission">Mission :</label>
+                        <input type="text" class="form-control" id="Mission" name="Mission" required>
                     </div>
                     <div class="title">
-                        <label for="date_embauche">Date d'embauche :</label>
-                        <input type="date" class="form-control" id="date_embauche" name="date_embauche" required>
-                      </div>
-                      <div class="title">
-                        <label for="prenom">Departement</label>
-                        <input type="text" class="form-control"  required>
-                      </div>
+                        <label for="date_embauche">Numero de telephone</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">+212</span>
+                            </div>
+                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Your phone number" required>
+                        </div>
+                    </div>
                     <div class="title">
-                      <label for="cv">CV ou carte d'identité :</label>
-                      <div>
-                      <input type="file" class="form-control-file" id="cv" name="cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
-                      <i class="fas fa-file-upload"></i>
-
+                        <label for="Duree_de_stage">Duree de stage :</label>
+                        <input type="text" class="form-control" id="Duree_de_stage" name="Duree_de_stage" required>
                     </div>
+                    <div class="title">
+                        <label for="password">mots de passe :</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary"  id="btn-aj">Ajouter</button>
-                  </form>
+                    
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex justify-content-center mt-3">
+                                <button type="submit" class="btn btn-primary form-control" id="btn_aj">Ajouter</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
 
 

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    protected $table = 'employes';
 
     /**
      * The attributes that are mass assignable.
@@ -34,9 +35,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -49,4 +56,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * The formations that belong to the user.
+     */
+    public function formations()
+    {
+        return $this->belongsToMany(Formation::class, 'formation_user')
+            ->withPivot('nom', 'prenom', 'role', 'title')
+            ->withTimestamps();
+    }
+    public function stagiaire()
+{
+    return $this->hasOne(Stagiaire::class);
+}
 }
