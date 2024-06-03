@@ -152,9 +152,9 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="buttons.html">
+                <a class="nav-link" href="{{route('show_actualite')}}">
                     <i class="fas fa-user-clock"></i>
-                    <span>Abscence</span></a>
+                    <span>Actualite</span></a>
             </li>
 
             <!-- Divider -->
@@ -231,7 +231,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">4+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -267,17 +267,17 @@
                                             <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
                                         @endif
                                     </div>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-warning">
+                                                <i class="fas fa-exclamation-triangle text-white"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        <span class="font-weight-bold">   Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
+                                        <div>
+                                            <div class="small text-gray-500">{{$derniereActualite->date_de_publication}}</div>
+                                            <span class="font-weight-bold">   {{$derniereActualite->titre}}
+                                        </div>
+                                    </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Voir toutes les Notifications</a>
                             </div>
                         </li>
@@ -293,13 +293,19 @@
                                   
                             @endif
                                 
-            <img src="{{ asset('import/img/islam.jpeg') }}" class="img-profile rounded-circle" alt="Logo">
+                            @if ($user && $user->photo)
+                            <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+                        @else
+                            <div class="circular-profile-pic">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        @endif
 
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('show_respo')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>

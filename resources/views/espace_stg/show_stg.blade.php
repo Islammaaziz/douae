@@ -45,6 +45,32 @@
         width: 500px;
     }
 
+    .circular-profile-pic {
+    width: 150px; /* Taille du cercle */
+    height: 150px; /* Taille du cercle */
+    border-radius: 50%; /* Crée le cercle */
+    overflow: hidden; /* Masque les éléments qui dépassent du cercle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Couleur de fond du cercle (optionnel) */
+}
+
+.circular-profile-pic img,
+.empty-profile-pic i {
+    width: 100%; /* Assure que l'image ou l'icône occupe tout le cercle */
+    height: 100%; /* Assure que l'image ou l'icône occupe tout le cercle */
+    object-fit: cover; /* Échelle l'image pour remplir le cercle */
+}
+
+.empty-profile-pic i {
+    font-size: 50px; /* Taille de l'icône */
+    color: #555; /* Couleur de l'icône */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
       </style>
 
 </head>
@@ -194,7 +220,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">4+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -233,8 +259,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        <span class="font-weight-bold">   Spending Alert: We've noticed unusually high spending for your account.
+                                        <div class="small text-gray-500">{{$derniereActualite->date_de_publication}}</div>
+                                        <span class="font-weight-bold">   {{$derniereActualite->titre}}
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Voir toutes les Notifications</a>
@@ -251,12 +277,18 @@
 
                                   
                             @endif
-                                <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
+                            @if ($user && $user->photo)
+                            <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+                        @else
+                            <div class="circular-profile-pic">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        @endif
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('show_per')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -283,7 +315,15 @@
     <h1>Bonjour  Mr.{{ $user->first_name }} {{ $user->last_name }}</h1>
     <form action="" method="" enctype="multipart/form-data">
         @csrf
+        <div class="title">
         <!-- Ajoutez les champs de formulaire nécessaires pour le profil stagiaire -->
+        @if ($user && $user->photo)
+        <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+    @else
+        <div class="circular-profile-pic">
+            <i class="fas fa-user"></i>
+        </div>
+    @endif
         <div class="title">
             <label for="nom">Nom :</label>
             <input type="text" class="form-control" id="nom" name="nom" required value="{{ $user->first_name }}">

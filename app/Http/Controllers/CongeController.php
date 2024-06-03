@@ -35,11 +35,25 @@ class CongeController extends BaseController
         // Redirection avec un message de succès
         return redirect()->back()->with('success', 'Demande de congé ajoutée avec succès.');
     }
-    public function show()
+    public function show(Request $request)
     {
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
         $demandesConge = Conge::where('status', 'pending')->get(); // Supposons que votre modèle s'appelle Conge
-        return view('conge', ['demandesConge' => $demandesConge]);
+        return view('conge', ['demandesConge' => $demandesConge], compact('user'));
     }
+    
+
+    public function afficher_conge_per(Request $request)
+    {
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
+       
+        return view('espace_per.conge_per', compact('user'));
+    }
+
     
     public function confirmerConge($id)
     {

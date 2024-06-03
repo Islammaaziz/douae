@@ -18,6 +18,11 @@ class StagiaireController extends BaseController
 
     public function register_stg(Request $request)
     {
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+        } else {
+            $path = null;
+        }
         // Enregistrer le stagiaire
         $stagiaire = Stagiaire::create([
             'first_name' => $request->first_name,
@@ -28,6 +33,7 @@ class StagiaireController extends BaseController
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'photo' => $path ,
         ]);
 
         // Envoi de l'e-mail de confirmation
@@ -59,22 +65,31 @@ class StagiaireController extends BaseController
         return redirect()->route('stageaires_add')->with('success', 'Employee created successfully');
     }
 
-    public function stageaires_show()
+    public function stageaires_show(Request $request)
     {
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
     $stagiaires = Stagiaire::all();
-    return view('stageaires_show', compact('stagiaires'));
+    return view('stageaires_show', compact('stagiaires','user'));
     }
 
-    public function show($id)
+    public function show(Request $request,$id)
 {
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
     $stagiaire = Stagiaire::findOrFail($id);
-    return view('show_stg', compact('stagiaire'));
+    return view('show_stg', compact('stagiaire','user'));
 }
 
-public function edit($id)
+public function edit(Request $request,$id)
 {
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
     $stagiaire = Stagiaire::findOrFail($id);
-    return view('edit_stg', compact('stagiaire'));
+    return view('edit_stg', compact('stagiaire','user'));
 }
 
 

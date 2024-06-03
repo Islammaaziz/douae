@@ -15,7 +15,7 @@ class Stagiaire extends Model
 
     protected $guard = 'intern'; // Utilisation du guard 'intern' pour l'authentification des stagiaires
     protected $fillable = [
-        'first_name', 'last_name', 'Tuteur', 'Duree_de_stage', 'Mission', 'phone', 'email', 'password',
+        'first_name', 'last_name', 'Tuteur', 'Duree_de_stage', 'Mission', 'phone', 'email', 'password','photo',
     ];
     protected $hidden = [
         'password', 'remember_token',

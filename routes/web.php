@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StagiaireController;
 use App\Http\Controllers\FormationController;
+use App\Http\Controllers\ActualiteController;
+use App\Http\Controllers\EmailController;
 use App\Http\Middleware\IsResponsable;
 use App\Http\Controllers\employeController;
 use App\Http\Controllers\CongeController;
@@ -31,6 +33,12 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::get('/signup_stg', function () {
     return view('signup_stg');
 })->name('signup_stg');
+
+
+
+
+Route::get('/show_actualite', [ActualiteController::class, 'show_actualite'])->name('show_actualite');
+
 
 Route::post('/register_stg', [StagiaireController::class, 'register_stg'])->name('register_stg');
 
@@ -109,9 +117,16 @@ Route::get('/employes_add', function () {
 })->name('employes_add');
 
 
-Route::get('/stageaires_add', function () {
-    return view('stageaires_add');
-})->name('stageaires_add');
+
+
+Route::get('/stageaires_add', [employeController::class, 'show_stageaires_add'])->name('stageaires_add');
+
+Route::get('/show_respo', [employeController::class, 'show_respo'])->name('show_respo');
+
+
+
+Route::get('/generer_rapport', [employeController::class, 'genererRapport'])->name('generer.rapport');
+
 
 Route::get('/formation', [FormationController::class, 'show'])->name('formation');
 
@@ -140,9 +155,10 @@ Route::get('/employes/{id}/edit', [EmployeController::class, 'edit'])->name('edi
 Route::put('/employes/{id}', [EmployeController::class, 'update'])->name('update_emp');
 Route::get('/employees/delete/{id}', [employeController::class,'delete'])->name('delete_emp');
 
-Route::get('/conge_per', function () {
-    return view('espace_per.conge_per');
-})->name('conge_per');
+
+
+Route::get('/conge_per', [CongeController::class,'afficher_conge_per'])->name('conge_per');
+
 
 
 Route::post('store_conge', [CongeController::class,'store'])->name('store_conge');
@@ -185,3 +201,14 @@ Route::get('/formation/{id}/edit', [FormationController::class, 'edit'])->name('
 Route::put('/formations/{id}', [FormationController::class, 'update'])->name('formations.update');
 
 Route::get('/formation/delete/{id}', [FormationController::class,'delete'])->name('delete_formation');
+
+
+
+
+Route::post('/ajouter_actualite', [ActualiteController::class, 'store'])->name('ajouter_actualite');
+
+
+
+
+Route::get('/envoyerEmail', [EmailController::class, 'send'])->name('envoyerEmail');
+

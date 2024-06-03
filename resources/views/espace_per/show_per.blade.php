@@ -47,6 +47,31 @@
     #btn-aj{
         width: 500px;
     }
+    .circular-profile-pic {
+    width: 150px; /* Taille du cercle */
+    height: 150px; /* Taille du cercle */
+    border-radius: 50%; /* Crée le cercle */
+    overflow: hidden; /* Masque les éléments qui dépassent du cercle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Couleur de fond du cercle (optionnel) */
+}
+
+.circular-profile-pic img,
+.empty-profile-pic i {
+    width: 100%; /* Assure que l'image ou l'icône occupe tout le cercle */
+    height: 100%; /* Assure que l'image ou l'icône occupe tout le cercle */
+    object-fit: cover; /* Échelle l'image pour remplir le cercle */
+}
+
+.empty-profile-pic i {
+    font-size: 50px; /* Taille de l'icône */
+    color: #555; /* Couleur de l'icône */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
       </style>
 
@@ -204,7 +229,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">4+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -240,17 +265,17 @@
                                 @endif
                             </div>
                         </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        <span class="font-weight-bold">   Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-warning">
+                                    <i class="fas fa-exclamation-triangle text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">{{$derniereActualite->date_de_publication}}</div>
+                                <span class="font-weight-bold">   {{$derniereActualite->titre}}
+                            </div>
+                        </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Voir toutes les Notifications</a>
                             </div>
                         </li>
@@ -261,16 +286,21 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @if(session('userName'))
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.   {{ session('userName') }}</span>
-
-                                  
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mr.   {{ session('userName') }}</span>   
                             @endif
-                                <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
+                            
+                            @if ($user->photo)
+                            <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+                        @else
+                            <div class="circular-profile-pic">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        @endif
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('show_per')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -301,6 +331,18 @@
                 </div>
                 <!-- /.container-fluid -->
                 <form action="traitement.php" method="post" enctype="multipart/form-data">
+@csrf
+                    <div class="title">
+                        
+                                @if ($user->photo)
+                                <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+                            @else
+                                <div class="circular-profile-pic">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            @endif
+             
+
                     <div class="title">
                       <label for="nom">Nom :</label>
                       <input type="text" class="form-control" id="nom" name="nom" required value=" {{ $user->first_name }}">

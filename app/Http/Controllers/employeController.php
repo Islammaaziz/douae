@@ -10,6 +10,7 @@ use App\Models\Conge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 
 class EmployeController extends BaseController
@@ -72,23 +73,32 @@ class EmployeController extends BaseController
         return redirect()->route('employes_add')->with('success', 'Employee created successfully');
     }
 
-        public function employes_show()
+        public function employes_show(Request $request)
     {
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
     $employes = Employe::all();
-    return view('employes_show', compact('employes'));
+    return view('employes_show', compact('employes','user'));
     }
 
 
-    public function show($id)
+    public function show(Request $request,$id)
 {
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
     $employe = Employe::findOrFail($id);
-    return view('show_emp', compact('employe'));
+    return view('show_emp', compact('employe','user'));
 }
 
-public function edit($id)
+public function edit(Request $request,$id)
 {
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
     $employe = Employe::findOrFail($id);
-    return view('edit_emp', compact('employe'));
+    return view('edit_emp', compact('employe','user'));
 }
 public function update(Request $request, $id)
 {
@@ -124,9 +134,14 @@ public function update(Request $request, $id)
     // Rediriger avec les valeurs modifiées
     return redirect()->route('edit_emp', $id)->with('success', 'Employé mis à jour avec succès')->with('updatedEmployee', $employe);
 }    
-public function compterEmploye()
+public function compterEmploye(Request $request)
 {
-    $conferenceRoomCapacity = 35;
+
+
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
+    $conferenceRoomCapacity = 20;
 
     $employeeCount = Employe::getEmployeeCount();
     $stagiaireCount = Stagiaire::getStagiaireCount();
@@ -147,7 +162,7 @@ public function compterEmploye()
         ];
     }
 
-    return view('homepage', compact('employeeCount', 'stagiaireCount', 'formationCount', 'formationsInscrites','demandeCongeCount'));
+    return view('homepage', compact('employeeCount', 'stagiaireCount', 'formationCount', 'formationsInscrites','demandeCongeCount','user'));
 }
 
     public function delete($id)
@@ -180,6 +195,23 @@ public function showProfile(Request $request)
    
     }
 }
+
+
+
+  public function show_stageaires_add(Request $request){
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
+       return  view('stageaires_add', compact('user'));
+  }
+
+public function show_respo(Request $request){
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
+       return  view('show_respo', compact('user'));
+  }
+
 public function ToEditProfile(Request $request)
 {
     // Vérifier si l'utilisateur est authentifié
@@ -245,6 +277,36 @@ public function updateProfile(Request $request)
         // Si le rôle n'est pas reconnu
         return redirect()->back()->withErrors(['role' => 'Invalid user role']);
     }
+}
+
+public function genererRapport()
+{
+    // Récupérer les données nécessaires pour le rapport
+    $employees = Employe::all();
+    $stageaires = Stagiaire::all();
+
+    // Calculer le pourcentage des employés et des stagiaires
+    $totalEmployees = $employees->count();
+    $totalStagiaires = $stageaires->count();
+
+    $percentageEmployees = ($totalEmployees > 0) ? ($totalEmployees / ($totalEmployees + $totalStagiaires)) * 100 : 0;
+    $percentageStagiaires = ($totalStagiaires > 0) ? ($totalStagiaires / ($totalEmployees + $totalStagiaires)) * 100 : 0;
+
+    // Récupérer les données nécessaires pour le rapport
+    $data = [
+        'title' => 'Rapport de Personnels',
+        'date' => date('m/d/Y'),
+        'employees' => $employees,
+        'stageaires' => $stageaires,
+        'percentageEmployees' => $percentageEmployees,
+        'percentageStagiaires' => $percentageStagiaires,
+    ];
+
+    // Charger la vue avec les données et générer le PDF
+    $pdf = PDF::loadView('rapports.employe', $data);
+
+    // Retourner le PDF pour le téléchargement
+    return $pdf->download('rapport_employes.pdf');
 }
 
 }

@@ -12,6 +12,12 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+        } else {
+            $path = null;
+        }
+       
         $employe = Employe::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -21,6 +27,7 @@ class RegisterController extends Controller
             'phone' => $request->phone,
             'departement' => $request->departement,
             'date_d_embauche' => now(),
+            'photo' => $path ,
         ]);
 
         // Envoi de l'e-mail de confirmation

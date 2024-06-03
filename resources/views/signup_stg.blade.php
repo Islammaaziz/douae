@@ -54,26 +54,51 @@
         .tit{
             margin-bottom: 30px;
         }
-         .add-circle-btn {
-    width: 50px; /* Ajustez la taille du cercle selon vos besoins */
-    height: 50px;
-    border-radius: 50%; /* Pour créer un cercle */
-    background-color: #007bff; /* Couleur de fond du cercle */
-    color: white; /* Couleur de l'icône */
-    border: none; /* Supprimez les bordures si nécessaire */
-    display: flex; /* Utilisez flexbox pour centrer l'icône */
-    justify-content: center; /* Centrage horizontal */
-    align-items: center; /* Centrage vertical */
-    cursor: pointer; /* Curseur pointer pour indiquer l'interaction */
-}
+        .upload-button {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #007bff;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-.add-circle-btn:hover {
-    background-color: #0056b3; /* Couleur de survol */
-}
+    .upload-button:hover {
+        background-color: #0056b3;
+    }
 
-.add-circle-btn i {
-    font-size: 24px; /* Taille de l'icône */
-}
+    .upload-button i {
+        font-size: 24px;
+    }
+
+    .upload-success {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 20px;
+        height: 20px;
+        background-color: green;
+        border-radius: 50%;
+        display: none; /* Hidden by default */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .upload-success i {
+        color: white;
+        font-size: 14px;
+    }
+
+    /* Hide default file input */
+    input[type="file"] {
+        display: none;
+    }
+
     </style>
 </head>
 
@@ -96,15 +121,18 @@
                                 <h1 class="h4 text-gray-900 mb-4">Créez un compte !<h3 class="tit">Stageaire</h3></h1> 
                             </div>
                
-    <form method="POST" action="{{ route('register_stg') }}">
+    <form method="POST" action="{{ route('register_stg') }}" enctype="multipart/form-data">
         @csrf
         <div>
             <div class="logo-container">
-                
-           
-                <button class="add-circle-btn">
+                <label for="file-upload" class="upload-button">
+                    <input type="file" id="file-upload" name="photo" onchange="handleFileUpload(this)">
                     <i class="fas fa-plus"></i>
-                </button>
+                    <div class="upload-success" id="upload-success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </label>
+           
             </div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -210,6 +238,14 @@
     <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
+    <script>
+        function handleFileUpload(input) {
+            const uploadSuccess = document.getElementById('upload-success');
+            if (input.files && input.files[0]) {
+                uploadSuccess.style.display = 'flex'; // Show the success icon
+            }
+        }
+    </script>
 </body>
 
 </html>

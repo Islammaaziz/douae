@@ -32,13 +32,19 @@ class FormationController extends BaseController
     }
 
 
-    public function showFormationAdd()
+    public function showFormationAdd(Request $request)
     {
-        return view('formation_add');
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
+        return view('formation_add',compact('user'));
     }
 
-    public function show()
+    public function show(Request $request)
     {
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
         $formations = Formation::with('users')->get();
         $conferenceRoomCapacity = 35;
     
@@ -48,13 +54,15 @@ class FormationController extends BaseController
             $formation->pourcentageInscription = ($numberOfUsers / $conferenceRoomCapacity) * 100;
         }
     
-        return view('formation', compact('formations'));
+        return view('formation', compact('formations','user'));
     }
 
-    public function showFormationper()
+    public function showFormationper(Request $request)
     {
         // Récupérer l'utilisateur connecté
-        $user = Auth::user();
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
     
         // Récupérer toutes les formations
         $formations = Formation::all();
@@ -73,9 +81,9 @@ class FormationController extends BaseController
     
         // Rediriger en fonction des inscriptions
         if (!empty($formationsInscrites)) {
-            return view('espace_per.formation_per', compact('formationsInscrites'));
+            return view('espace_per.formation_per', compact('formationsInscrites','user'));
         } else {
-            return view('espace_per.prochain_formation_per', compact('formationsNonInscrites'));
+            return view('espace_per.prochain_formation_per', compact('formationsNonInscrites','user'));
         }
     }
 
@@ -98,7 +106,7 @@ class FormationController extends BaseController
             $formationsNonInscrites[] = $formation;
         }
     }
-        return view('espace_stg.formation_stg', compact('formationsInscrites'));
+        return view('espace_stg.formation_stg', compact('formationsInscrites','user'));
     
 }
 
@@ -149,9 +157,9 @@ class FormationController extends BaseController
                 }
             
                 // Récupérer le dernier congé de l'utilisateur
-                $dernierConge = Conge::where('employee_id', $user->id)->latest()->first();
+                $MonConge = Conge::where('employee_id', $user->id)->latest()->first();
         
-                return view('espace_per.dashbord_per', compact('formationsInscrites','nombreFormationsInscrites', 'pourcentageFormationsInscrites','totalFormations', 'dernierConge'));
+                return view('espace_per.dashbord_per', compact('formationsInscrites','nombreFormationsInscrites', 'pourcentageFormationsInscrites','totalFormations', 'MonConge','user'));
             }
         }
         
@@ -207,7 +215,7 @@ class FormationController extends BaseController
                 }
             }
         
-            return view('espace_stg.dashbord_stg', compact('formationsInscrites', 'nombreFormationsInscrites', 'pourcentageFormationsInscrites', 'totalFormations', 'formationEnCours'));
+            return view('espace_stg.dashbord_stg', compact('formationsInscrites', 'nombreFormationsInscrites', 'pourcentageFormationsInscrites', 'totalFormations', 'formationEnCours','user'));
         }
     }
 
@@ -216,11 +224,12 @@ class FormationController extends BaseController
 
 
 
-    public function showNewFormation()
+    public function showNewFormation(Request $request)
     {
         // Récupérer l'utilisateur connecté
-        $user = Auth::user();
-    
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
         // Récupérer toutes les formations
         $formations = Formation::all();
     
@@ -235,7 +244,7 @@ class FormationController extends BaseController
                 $formationsNonInscrites[] = $formation;
             }
         }
-            return view('espace_per.prochain_formation_per', compact('formationsNonInscrites'));
+            return view('espace_per.prochain_formation_per', compact('formationsNonInscrites','user'));
         
     }
 
@@ -260,16 +269,19 @@ class FormationController extends BaseController
                 $formationsNonInscrites[] = $formation;
             }
         }
-            return view('espace_stg.prochain_formation_stg', compact('formationsNonInscrites'));
+            return view('espace_stg.prochain_formation_stg', compact('formationsNonInscrites','user'));
         
     }
 
     }
 
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+        }
         $formation = Formation::findOrFail($id);
-        return view('formation_edit', compact('formation'));
+        return view('formation_edit', compact('formation','user'));
     } 
 
     
@@ -382,8 +394,11 @@ public function delete($id)
     }
 }
 
-public function listeUtilisateurs($id)
+public function listeUtilisateurs(Request $request,$id)
 {
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
     // Récupérer la formation par son ID
     $formation = Formation::findOrFail($id);
 
@@ -391,8 +406,10 @@ public function listeUtilisateurs($id)
     $utilisateurs = $formation->users()->get();
 
     // Retourner la vue avec la liste des utilisateurs
-    return view('emp_inscrit_formation', compact('formation', 'utilisateurs'));
+    return view('emp_inscrit_formation', compact('formation', 'utilisateurs','user'));
 }
+
+
 
 
 }

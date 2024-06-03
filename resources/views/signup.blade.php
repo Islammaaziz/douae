@@ -54,26 +54,56 @@
         .tit{
             margin-bottom: 30px;
         }
-        .add-circle-btn {
-    width: 50px; /* Ajustez la taille du cercle selon vos besoins */
-    height: 50px;
-    border-radius: 50%; /* Pour créer un cercle */
-    background-color: #007bff; /* Couleur de fond du cercle */
-    color: white; /* Couleur de l'icône */
-    border: none; /* Supprimez les bordures si nécessaire */
-    display: flex; /* Utilisez flexbox pour centrer l'icône */
-    justify-content: center; /* Centrage horizontal */
-    align-items: center; /* Centrage vertical */
-    cursor: pointer; /* Curseur pointer pour indiquer l'interaction */
-}
+        .logo-container {
+        position: relative;
+    }
 
-.add-circle-btn:hover {
-    background-color: #0056b3; /* Couleur de survol */
-}
+    .upload-button {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #007bff;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-.add-circle-btn i {
-    font-size: 24px; /* Taille de l'icône */
-}
+    .upload-button:hover {
+        background-color: #0056b3;
+    }
+
+    .upload-button i {
+        font-size: 24px;
+    }
+
+    .upload-success {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 20px;
+        height: 20px;
+        background-color: green;
+        border-radius: 50%;
+        display: none; /* Hidden by default */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .upload-success i {
+        color: white;
+        font-size: 14px;
+    }
+
+    /* Hide default file input */
+    input[type="file"] {
+        display: none;
+    }
+
+    
     </style>
 </head>
 
@@ -94,14 +124,19 @@
                                 <h1 class="h4 text-gray-900 mb-4">Créez un compte !<h3 class="tit">Employe</h3></h1> 
                             </div>
                
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
         <div>
             <div class="logo-container">
-                <button type="button" class="add-circle-btn" id="add-photo-btn">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
+                <label for="file-upload" class="upload-button">
+                    <input type="file" id="file-upload" name="photo" onchange="handleFileUpload(this)">
+                    <i class="fas fa-plus"></i>
+                    <div class="upload-success" id="upload-success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </label>
+           
+            </div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" class="form-control form-control-user" id="exampleFirstName"
@@ -202,27 +237,25 @@
     <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
-   
-<script>
-    document.getElementById('add-photo-btn').addEventListener('click', function() {
-        // Crée dynamiquement un input type="file"
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*'; // Accepter uniquement les images
-
-        // Déclenche l'ouverture du sélecteur de fichiers
-        fileInput.click();
-
-        // Optionnel : Vous pouvez ajouter un événement de changement pour gérer le fichier sélectionné
-        fileInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                console.log('Fichier sélectionné :', file.name);
-                // Vous pouvez ajouter ici le code pour prévisualiser ou télécharger le fichier
-            }
+    <script>
+        document.getElementById('add-photo-btn').addEventListener('click', function() {
+            // Crée dynamiquement un input type="file"
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            
+            // Déclenche l'ouverture du sélecteur de fichiers
+            fileInput.click();
         });
-    });
-</script>
+    </script>
+      <script>
+        function handleFileUpload(input) {
+            const uploadSuccess = document.getElementById('upload-success');
+            if (input.files && input.files[0]) {
+                uploadSuccess.style.display = 'flex'; // Show the success icon
+            }
+        }
+    </script>
 </body>
 
 </html>

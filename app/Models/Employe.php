@@ -24,6 +24,7 @@ class Employe extends Model
         'password',
         'date_embauche',
         'poste',
+        'photo',
         'departement',
     ];
 

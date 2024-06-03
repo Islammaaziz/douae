@@ -145,9 +145,9 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="buttons.html">
+                <a class="nav-link" href="{{route('show_actualite')}}">
                     <i class="fas fa-user-clock"></i>
-                    <span>Abscence</span></a>
+                    <span>Actualite</span></a>
             </li>
 
             <!-- Divider -->
@@ -213,7 +213,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">4+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -256,8 +256,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        <span class="font-weight-bold">   Spending Alert: We've noticed unusually high spending for your account.
+                                        <div class="small text-gray-500">{{$derniereActualite->date_de_publication}}</div>
+                                        <span class="font-weight-bold">   {{$derniereActualite->titre}}
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Voir toutes les Notifications</a>
@@ -274,13 +274,19 @@
 
                                   
                             @endif
-            <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
+                            @if ($user && $user->photo)
+                            <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+                        @else
+                            <div class="circular-profile-pic">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        @endif
                             
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('show_respo')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -307,8 +313,9 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Tableau de bord</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generer Rapport</a>
+                        <a href="{{ route('generer.rapport') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-download fa-sm text-white-50"></i> Générer Rapport
+                        </a>
                     </div>
 
                     <!-- Content Row -->
@@ -461,16 +468,17 @@
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-newspaper"></i>
-                                            Actuality</h6>
+                                            Actualite </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="text-center">
             <img src="{{ asset('import/img/voice-speaker.png') }}" alt="Logo" width="200px">
 
                                         </div>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates rerum aperiam repellendus voluptatem illo qui asperiores vitae eos. Molestias doloribus molestiae nostrum inventore veritatis id iste eaque perspiciatis ut aliquid.
-                                        cette partie contient les nouveaux annonces
+                                        <h5>{{ $derniereActualite->titre}}</h5>
+                                        <p>{{ $derniereActualite->contenu}}</p>
                                     </div>
+                                    {{ $derniereActualite->date_de_publication}}
                                 </div>
                         
                                 <!-- Development Approach -->

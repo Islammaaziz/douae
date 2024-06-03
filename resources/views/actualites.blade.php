@@ -11,47 +11,77 @@
 
     <title>SB Admin 2 - Blank</title>
 
-    <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <link href="{{ asset('import/css/sb-admin-2.min.css') }}" rel="stylesheet">
 <script src="{{ asset('import/js/vendor/fontawesome-free/js/all.min.js') }}"></script>
 
     <style>
-         .form-container {
-      max-width: 500px;
-      margin: auto;
-      margin-top: 50px;
+        body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
     }
-    .card {
-      border-radius: 15px;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
     }
-    .card-header {
-      border-radius: 15px 15px 0 0;
-    }
-    .form-group {
+
+    th, td {
+      padding: 10px;
       text-align: center;
-    }*
-    .title{
-        margin-left: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #d5cece;
+      color: #fff;
+    }
+
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+
+    .confirm-btn, .reject-btn {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .confirm-btn {
+      background-color: #5cb85c;
+      color: #fff;
+    }
+
+    .confirm-btn:hover {
+      background-color: #4cae4c;
+    }
+
+    .reject-btn {
+      background-color: #d9534f;
+      color: #fff;
+    }
+
+    .reject-btn:hover {
+      background-color: #c9302c;
     }
 
 
 
 
-    #btn-aj{
-        width: 500px;
-    }
-
-      </style>
+    </style>
 
 </head>
 
 <body id="page-top">
 
     <!-- Page Wrapper -->
-     <!-- Page Wrapper -->
-     <div id="wrapper">
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -79,7 +109,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                  Espace  Personnels
+                   Espace Personnels
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -121,7 +151,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                   Espace Services
+                  Espace  Services
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -144,11 +174,12 @@
     
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('show_conge') }}">
+                    <a class="nav-link" href="{{route('show_conge')}}">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Conge</span></a>
                 </li>
     
+
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('show_actualite')}}">
@@ -184,7 +215,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                   <h3>BC SKILLS</h3>
+                 <h3>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -228,18 +259,19 @@
                                    Notifications
                                 </h6>
                                 @foreach($derniereformations as $shformations)
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">{{ $shformations->date_debut }}</div>
-                                        <span class="font-weight-bold">Une nouvelle formation ajoutée : {{ $shformations->titre }}</span>
-                                    </div>
-                                </a>
-                            @endforeach
+                               <a class="dropdown-item d-flex align-items-center" href="#">
+                                   <div class="mr-3">
+                                       <div class="icon-circle bg-primary">
+                                           <i class="fas fa-file-alt text-white"></i>
+                                       </div>
+                                   </div>
+                                   <div>
+                                       <div class="small text-gray-500">{{ $shformations->date_debut }}</div>
+                                       <span class="font-weight-bold">Une nouvelle formation ajoutée : {{ $shformations->titre }}</span>
+                                   </div>
+                               </a>
+                           @endforeach
+                          
                             <div>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
@@ -255,17 +287,18 @@
                                             <span class="font-weight-bold">Vous n'avez pas encore de demande de congé.</span>
                                         @endif
                                     </div>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-warning">
-                                                <i class="fas fa-exclamation-triangle text-white"></i>
-                                            </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
                                         </div>
-                                        <div>
-                                            <div class="small text-gray-500">{{$derniereActualite->date_de_publication}}</div>
-                                            <span class="font-weight-bold">   {{$derniereActualite->titre}}
-                                        </div>
-                                    </a>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">{{$derniereActualite->date_de_publication}}</div>
+                                        <span class="font-weight-bold">   {{$derniereActualite->titre}}
+                                    </div>
+                                </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Voir toutes les Notifications</a>
                             </div>
                         </li>
@@ -298,7 +331,7 @@
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                  Parametres
+                                    Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('Rlogin')}}" >
@@ -311,58 +344,46 @@
                     </ul>
 
                 </nav>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">consulter Stageaire {{ $stagiaire->first_name }} {{ $stagiaire->last_name }}</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Espace Actualites</h1>
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-circle"></i> les actualites seront affiche a toutes les personnels
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <form action="{{route('ajouter_actualite')}}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="titre">Titre</label>
+                                        <input type="text" class="form-control" id="titre" name="titre" required>
+                                    </div>
+                                    @error('titre')
+                                      <div class="alert alert-danger">{{ $message }}</div>
+                                         @enderror
 
+                                    <div class="form-group">
+                                        <label for="contenu">Contenu</label>
+                                        <input type="text" class="form-control" id="contenu" name="contenu" required>
+                                    </div>
+                                    @error('contenu')
+                                     <div class="alert alert-danger">{{ $message }}</div>
+                                     @enderror
+                
+                            
+                                    <button type="submit" class="btn btn-primary form-control">Ajouter Actualite</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
                 <!-- /.container-fluid -->
-                <form action="traitement.php" method="post" enctype="multipart/form-data">
-                    <div class="title">
-                      <label for="nom">Nom :</label>
-                      <input type="text" class="form-control" id="nom" name="nom" required value="{{ $stagiaire->first_name }}">
-                    </div>
-                    <div class="title">
-                      <label for="prenom">Prénom :</label>
-                      <input type="text" class="form-control" id="prenom" name="prenom" required value="{{ $stagiaire->last_name }}">
-                    </div>
-                    <div class="title">
-                      <label for="Duree_de_stage">Dure de stage</label>
-                      <input  class="form-control" id="Duree_de_stage" name="Duree_de_stage" required value="{{ $stagiaire->Duree_de_stage }}">
-                    </div>
-                    <div class="title">
-                      <label for="Tuteur">Tuteur</label>
-                      <input type="text" class="form-control" id="Tuteur" name="Tuteur" required value="{{ $stagiaire->Tuteur }}">
-                    </div>
-                    <div class="title">
-                      <label for="Mission">Mission</label>
-                      <input type="text" class="form-control" id="Mission" name="Mission" required value="{{ $stagiaire->Mission }}">
-                    </div>
-                    <div class="title">
-                        <label for="phone">Numero de telephone :</label>
-                        <input type="text" class="form-control" id="phone" name="phone" required value="+212{{ $stagiaire->phone }}">
-                      </div>
-                    <div class="title">
-                        <label for="email">email :</label>
-                        <input type="text" class="form-control" id="email" name="email" required value="{{ $stagiaire->email }}">
-                      </div>
-                   
-                    
-                  </form>
+               
 
 
 
@@ -375,7 +396,6 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Creer par &copy;ISLAM,DOUAE,MOHAMED</span>
-
                     </div>
                 </div>
             </footer>
@@ -406,7 +426,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                    <a class="btn btn-primary" href="#">Logout</a>
                 </div>
             </div>
         </div>

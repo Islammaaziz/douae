@@ -386,7 +386,7 @@ h1, h2 {
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">4+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -407,17 +407,17 @@ h1, h2 {
                                     </div>
                                 </a>
                             @endforeach
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-warning">
+                                        <i class="fas fa-exclamation-triangle text-white"></i>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500">Avril 29, 2024</div>
-                                        <span class="font-weight-bold">   Formation de Marketing Digital
-                                    </div>
-                                </a>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">{{$derniereActualite->date_de_publication}}</div>
+                                    <span class="font-weight-bold">   {{$derniereActualite->titre}}
+                                </div>
+                            </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
@@ -443,13 +443,19 @@ h1, h2 {
 
                                   
                             @endif
-                                <img src="{{ asset('import/img/islam.jpeg') }}"  class="img-profile rounded-circle" alt="Logo" width="20px">
+                            @if ($user && $user->photo)
+                            <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+                        @else
+                            <div class="circular-profile-pic">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        @endif
 
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('show_per')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>

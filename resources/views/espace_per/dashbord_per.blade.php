@@ -184,7 +184,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">4+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -227,8 +227,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        <span class="font-weight-bold">   Spending Alert: We've noticed unusually high spending for your account.
+                                        <div class="small text-gray-500">{{$derniereActualite->date_de_publication}}</div>
+                                        <span class="font-weight-bold">   {{$derniereActualite->titre}}
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Voir toutes les Notifications</a>
@@ -245,13 +245,19 @@
 
                                   
                             @endif
-                                <img src="{{ asset('import/img/islam.jpeg') }}" alt="Logo"  class="img-profile rounded-circle" width="20px">
+                                @if ($user->photo)
+                                <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+                            @else
+                                <div class="circular-profile-pic">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            @endif
 
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('show_per')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -313,7 +319,13 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Jour De Conge (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$dernierConge->annual_conge_days}} Jours</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    @if ($MonConge && $MonConge->annual_conge_days > 0)
+                                                        {{ $MonConge->annual_conge_days }} Jours
+                                                    @else
+                                                        18
+                                                    @endif
+                                                </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user-graduate fa-fw"></i>
@@ -360,7 +372,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                Etat De derneir Conge</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$dernierConge->status}}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$derniereConge->status}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-umbrella-beach fa-fw"></i>
@@ -420,7 +432,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach>
+                                        @endforeach
                                         </div>
                                        
                                 </div>
@@ -455,16 +467,17 @@
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-newspaper"></i>
-                                            Actuality</h6>
+                                            Actualite </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="text-center">
             <img src="{{ asset('import/img/voice-speaker.png') }}" alt="Logo" width="200px">
-                                        
+
                                         </div>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates rerum aperiam repellendus voluptatem illo qui asperiores vitae eos. Molestias doloribus molestiae nostrum inventore veritatis id iste eaque perspiciatis ut aliquid.
-                                        cette partie contient les nouveaux annonces
+                                        <h5>{{ $derniereActualite->titre}}</h5>
+                                        <p>{{ $derniereActualite->contenu}}</p>
                                     </div>
+                                    {{ $derniereActualite->date_de_publication}}
                                 </div>
                         
                                 <!-- Development Approach -->

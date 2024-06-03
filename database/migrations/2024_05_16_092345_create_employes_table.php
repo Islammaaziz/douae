@@ -11,15 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conges', function (Blueprint $table) {
+        Schema::create('employes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employee_id'); // Ajout de la colonne employee_id
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('status')->default('pending');
-            $table->text('comment')->nullable();
-            $table->integer('annual_conge_days');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('poste');
+            $table->date('Date_d_embauche');
+            $table->string('departement');
+            $table->string('phone')->nullable();
+            $table->boolean('is_responsable')->default(false);
+            $table->string('role')->default('employee');
+            $table->string('email')->unique();
+            $table->string('photo')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->timestamps();
         });
     }

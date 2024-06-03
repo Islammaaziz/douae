@@ -15,6 +15,7 @@ class CreateStagiairesTable extends Migration
             $table->string('Duree_de_stage')->nullable();
             $table->string('Mission')->nullable();
             $table->string('phone')->nullable();
+            $table->string('photo')->nullable();
             $table->string('role')->default('stagiaire');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

@@ -42,6 +42,32 @@
     #btn-aj{
         width: 500px;
     }
+    .circular-profile-pic {
+    width: 150px; /* Taille du cercle */
+    height: 150px; /* Taille du cercle */
+    border-radius: 50%; /* Crée le cercle */
+    overflow: hidden; /* Masque les éléments qui dépassent du cercle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Couleur de fond du cercle (optionnel) */
+}
+
+.circular-profile-pic img,
+.empty-profile-pic i {
+    width: 100%; /* Assure que l'image ou l'icône occupe tout le cercle */
+    height: 100%; /* Assure que l'image ou l'icône occupe tout le cercle */
+    object-fit: cover; /* Échelle l'image pour remplir le cercle */
+}
+
+.empty-profile-pic i {
+    font-size: 50px; /* Taille de l'icône */
+    color: #555; /* Couleur de l'icône */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
       </style>
 
@@ -79,7 +105,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                  Espace  Personnels
+                   Espace Personnel
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -121,7 +147,7 @@
     
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                   Espace Services
+                  Espace  Services
                 </div>
     
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -133,7 +159,7 @@
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Formation </h6>
+                            <h6 class="collapse-header">Formation</h6>
                             <a class="collapse-item" href="{{ route('formation') }}">Consulter Formation</a>
                             <a class="collapse-item" href="{{ route('formation_add') }}">Ajouter Formation</a>
 
@@ -298,7 +324,7 @@
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                  Parametres
+                                    Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('Rlogin')}}" >
@@ -311,56 +337,58 @@
                     </ul>
 
                 </nav>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">consulter Stageaire {{ $stagiaire->first_name }} {{ $stagiaire->last_name }}</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Bonjour Mr.{{ $user->first_name }} {{$user->last_name}}</h1>
 
                 </div>
                 <!-- /.container-fluid -->
                 <form action="traitement.php" method="post" enctype="multipart/form-data">
+@csrf
+<div class="title">
+                      
+    @if ($user->photo)
+    <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de Profil" class="circular-profile-pic img-profile rounded-circle" width="20px">
+@else
+    <div class="circular-profile-pic">
+        <i class="fas fa-user"></i>
+    </div>
+@endif
+             
+
                     <div class="title">
                       <label for="nom">Nom :</label>
-                      <input type="text" class="form-control" id="nom" name="nom" required value="{{ $stagiaire->first_name }}">
+                      <input type="text" class="form-control" id="nom" name="nom" required value=" {{ $user->first_name }}">
                     </div>
                     <div class="title">
                       <label for="prenom">Prénom :</label>
-                      <input type="text" class="form-control" id="prenom" name="prenom" required value="{{ $stagiaire->last_name }}">
+                      <input type="text" class="form-control" id="prenom" name="prenom" required value=" {{ $user->last_name }}">
+                    </div>
+                    
+                    <div class="title">
+                      <label for="poste">Poste :</label>
+                      <input type="text" class="form-control" id="poste" name="poste" required value=" {{ $user->poste }}">
                     </div>
                     <div class="title">
-                      <label for="Duree_de_stage">Dure de stage</label>
-                      <input  class="form-control" id="Duree_de_stage" name="Duree_de_stage" required value="{{ $stagiaire->Duree_de_stage }}">
-                    </div>
-                    <div class="title">
-                      <label for="Tuteur">Tuteur</label>
-                      <input type="text" class="form-control" id="Tuteur" name="Tuteur" required value="{{ $stagiaire->Tuteur }}">
-                    </div>
-                    <div class="title">
-                      <label for="Mission">Mission</label>
-                      <input type="text" class="form-control" id="Mission" name="Mission" required value="{{ $stagiaire->Mission }}">
-                    </div>
-                    <div class="title">
-                        <label for="phone">Numero de telephone :</label>
-                        <input type="text" class="form-control" id="phone" name="phone" required value="+212{{ $stagiaire->phone }}">
+                        <label for="phone">telephone :</label>
+                        <input type="text" class="form-control" id="phone" name="phone" required value=" {{ $user->phone }}">
                       </div>
+                    <div class="title">
+                      <label for="Date_d_embauche">Date d'embauche :</label>
+                      <input  class="form-control" id="Date_d_embauche" name="Date_d_embauche" required value=" {{ $user->Date_d_embauche }}">
+                    </div>
+                    <div class="title">
+                      <label for="departement">Département :</label>
+                      <input type="text" class="form-control" id="departement" name="departement" required value=" {{ $user->departement }}">
+                    </div>
                     <div class="title">
                         <label for="email">email :</label>
-                        <input type="text" class="form-control" id="email" name="email" required value="{{ $stagiaire->email }}">
+                        <input type="text" class="form-control" id="email" name="email" required value=" {{ $user->email }}">
                       </div>
-                   
                     
                   </form>
 
@@ -419,6 +447,15 @@
     <script src="{{ asset('import/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
+
+    <script>document.addEventListener('DOMContentLoaded', function() {
+        const body = document.querySelector('body');
+        const toggleDarkModeButton = document.querySelector('#toggle-dark-mode');
+    
+        toggleDarkModeButton.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+        });
+    });</script>
 
 </body>
 
