@@ -12,6 +12,12 @@ use App\Http\Controllers\employeController;
 use App\Http\Controllers\CongeController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Hash;
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
+
 
 //**********LOGIN****************** */
 Route::get('/', function () {
@@ -29,6 +35,11 @@ Route::get('/signup', function () {
 })->name('signup');
 
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/email/verify/{id}/{token}', [RegisterController::class, 'verifyEmail'])->name('verification.verify');
+
+Route::get('/test-email', 'RegisterController@sendTestEmail');
+Route::post('/test-email', [RegisterController::class, 'sendTestEmail'])->name('send-test-email');
+
 
 Route::get('/signup_stg', function () {
     return view('signup_stg');
@@ -117,6 +128,10 @@ Route::get('/employes_add', function () {
 })->name('employes_add');
 
 
+Route::get('/employes_add', [employeController::class, 'show_employes_add'])->name('employes_add');
+
+
+
 
 
 Route::get('/stageaires_add', [employeController::class, 'show_stageaires_add'])->name('stageaires_add');
@@ -126,6 +141,9 @@ Route::get('/show_respo', [employeController::class, 'show_respo'])->name('show_
 
 
 Route::get('/generer_rapport', [employeController::class, 'genererRapport'])->name('generer.rapport');
+
+Route::get('/generer_rapport_conge', [employeController::class, 'genererRapportconge'])->name('generer.rapportConge');
+
 
 
 Route::get('/formation', [FormationController::class, 'show'])->name('formation');

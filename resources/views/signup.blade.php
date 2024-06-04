@@ -115,6 +115,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="p-5">
+                            <h1 class="h4 text-gray-900 mb-4">Créez un compte !</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Créez un compte !</h1>
+
                           
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Créez un compte !</h1>
@@ -214,6 +217,8 @@
        
 
     </form>
+    
+   
                             
                             <hr>
                             

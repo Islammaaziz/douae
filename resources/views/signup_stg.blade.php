@@ -114,6 +114,9 @@
                             <div class="text-center">
                                 <h1>$$$</h1>
                                 <h1 class="h4 text-gray-900 mb-4">Créez un compte !</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Créez un compte !</h1>
+
+                                <h1 class="h4 text-gray-900 mb-4">Créez un compte !</h1>
 
                                   <div class="logo-container">
                                     <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo">

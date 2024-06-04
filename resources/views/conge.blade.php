@@ -70,6 +70,9 @@
     .reject-btn:hover {
       background-color: #c9302c;
     }
+    .bg {
+    background: linear-gradient(to bottom, #003e68, #0073c0);
+}
 
 
 
@@ -84,7 +87,8 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg sidebar sidebar-dark accordion" id="accordionSidebar">
+
             <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo">
 
            
@@ -334,9 +338,9 @@
                                     Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('Rlogin')}}" >
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Se deconnecter
+                                    Se déconnecter
                                 </a>
                             </div>
                         </li>
@@ -350,8 +354,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Demande Conge</h1>
-
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Demande de conge</h1>
+                        <a href="{{route('generer.rapportConge')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-download fa-sm text-white-50"></i> Générer Rapport
+                        </a>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
                 <table>
@@ -417,25 +425,27 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Prêt à partir ?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à votre session actuelle.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-primary" href="{{ route('Rlogin') }}"
+                        >
+                        Déconnexion
+                    </a>
+                    
                 </div>
             </div>
         </div>
     </div>
-
     <script src="{{ asset('import/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('import/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('import/vendor/jquery-easing/jquery.easing.min.js') }}"></script>

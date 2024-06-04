@@ -35,9 +35,10 @@
     .title{
         margin-left: 20px;
     }
-    .bg{
-        background-color: #7093fa;
-    }
+    .bg {
+    background: linear-gradient(to bottom, #003e68, #0073c0);
+}
+
 
 
 
@@ -88,7 +89,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                
-                    <div class="sidebar-brand-text mx-3"><h4><i class="fas fa-bars"></i>Menu Stageaire </h4></div>
+                    <div class="sidebar-brand-text mx-3"><h4><i class="fas fa-bars"></i>Menu STG </h4></div>
             </a>
 
             <!-- Divider -->
@@ -220,7 +221,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">4+</span>
+                                <span class="badge badge-danger badge-counter">3+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -252,17 +253,7 @@
                                 <span class="font-weight-bold">   {{$derniereActualite->titre}}
                             </div>
                         </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        <span class="font-weight-bold">   Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
+                                
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Voir toutes les Notifications</a>
                             </div>
                         </li>
@@ -297,9 +288,9 @@
                                     Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('Rlogin')}}" >
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Se deconnecter
+                                    Se déconnecter
                                 </a>
                             </div>
                         </li>
@@ -388,20 +379,23 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Prêt à partir ?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à votre session actuelle.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                    <a class="btn btn-primary" href="{{ route('Rlogin') }}"
+                        >
+                        Déconnexion
+                    </a>
+                    
                 </div>
             </div>
         </div>

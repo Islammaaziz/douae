@@ -109,12 +109,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">Se Connecter</button>
                                 <hr>
-                                <a href="#" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Se Connecter avec Google
-                                </a>
-                                <a href="#" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Se Connecter avec Facebook
-                                </a>
+                               
                             </form>
                             
                             <hr>

@@ -246,6 +246,9 @@ h1, h2 {
         .sp{
             margin-top: 10px
         }
+        .bg {
+    background: linear-gradient(to bottom, #003e68, #0073c0);
+}
 
     </style>
 
@@ -257,7 +260,7 @@ h1, h2 {
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg sidebar sidebar-dark accordion" id="accordionSidebar">
             <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo">
 
            
@@ -504,9 +507,9 @@ h1, h2 {
                                     Parametres
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('Rlogin')}}" >
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    se deconnecter
+                                    Se déconnecter
                                 </a>
                             </div>
                         </li>
@@ -536,7 +539,7 @@ h1, h2 {
 
                                 <a href="{{ route('formations.listeUtilisateurs', $formation->id) }}"
                                     class="btn btn-success eliminer_la_decoration">Consulter Employés</a>
-                                    <a href="{{ route('delete_formation', $formation->id) }}"  class="btn btn-danger  eliminer_la_decoration">Annuler</a>
+                                    <a data-toggle="modal" data-target="#deleteModal" data-url="{{ route('delete_emp', ['id' => $formation->id]) }}"  class="btn btn-danger  eliminer_la_decoration">Annuler</a>
                             </div>
                             <div class="modal fade" id="modalConfirm-{{ $formation->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="modalConfirmLabel" aria-hidden="true">
@@ -563,17 +566,25 @@ h1, h2 {
                     </main>
             
                 </div>
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Confirmation de suppression</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Êtes-vous sûr de vouloir supprimer cet formation ?</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                                <a class="btn btn-primary" id="confirmDeleteBtn" href="#">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
-                <div class="modal" id="detailsModal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <h2>Détails de la Formation</h2>
-                        <p id="modal-description">{{ $formation->description }}</p>
-                        <a href="{{ route('formation_edit', $formation->id) }}"><button class="eliminer_la_decoration">Modifier</button></a>
-                        <a href="{{ route('formations.listeUtilisateurs', $formation->id) }}"><button class="eliminer_la_decoration">Consulter Employés</button></a>
-                        <a href="#" onclick=""><button class="eliminer_la_decoration details-btn cl">Annuler</button></a>
-                    </div>
-                    </div>
+                
                     
                     </div>
                     <!-- End of Main Content -->
@@ -600,24 +611,29 @@ h1, h2 {
                     </a>
                     
                     <!-- Logout Modal-->
-                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Prêt à partir ?</h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                                <div class="modal-body">Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à votre session actuelle.</div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                    <a class="btn btn-primary" href="#">Logout</a>
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                                    <a class="btn btn-primary" href="{{ route('Rlogin') }}"
+                                        >
+                                        Déconnexion
+                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                  
                     
                     <script src="{{ asset('import/vendor/jquery/jquery.min.js') }}"></script>
                     <script src="{{ asset('import/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -628,28 +644,7 @@ h1, h2 {
                     <script src="{{ asset('import/js/demo/chart-pie-demo.js') }}"></script>
                     <script src="js/sb-admin-2.min.js"></script>
                     
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            const cancelLinks = document.querySelectorAll('.cancel-link');
-                            cancelLinks.forEach(link => {
-                                link.addEventListener('click', function (event) {
-                                    event.preventDefault();
-                                    const modalId = this.getAttribute('data-target');
-                                    const modal = document.querySelector(modalId);
-                                    if (modal) {
-                                        modal.classList.remove('show'); // Retire la classe 'show' pour masquer le modal
-                                        setTimeout(() => { // Utilise setTimeout pour retarder la suppression du modal
-                                            modal.style.display = 'none'; // Masque le modal
-                                            const backdrop = document.querySelector('.modal-backdrop');
-                                            if (backdrop) {
-                                                backdrop.remove(); // Supprime le fond gris
-                                            }
-                                        }, 200); // Temps de retard en millisecondes
-                                    }
-                                });
-                            });
-                        });
-                    </script>
+                   
                     
                     </body>
                     </html>

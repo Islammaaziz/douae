@@ -146,7 +146,7 @@ public function compterEmploye(Request $request)
     $employeeCount = Employe::getEmployeeCount();
     $stagiaireCount = Stagiaire::getStagiaireCount();
     $formationCount = Formation::getFormationCount();
-    $demandeCongeCount = Conge::count();
+    $demandeCongeCount = Conge::where('status', 'pending')->count();
 
     // Assuming you want to get all formations and calculate the percentage for each
     $formations = Formation::all();
@@ -203,6 +203,14 @@ public function showProfile(Request $request)
         $user = $request->session()->get('user');
     }
        return  view('stageaires_add', compact('user'));
+  }
+
+
+  public function show_employes_add(Request $request){
+    if ($request->session()->has('user')) {
+        $user = $request->session()->get('user');
+    }
+       return  view('employes_add', compact('user'));
   }
 
 public function show_respo(Request $request){
@@ -307,6 +315,30 @@ public function genererRapport()
 
     // Retourner le PDF pour le téléchargement
     return $pdf->download('rapport_employes.pdf');
+}
+
+
+public function genererRapportconge()
+{
+    // Récupérer les données nécessaires pour le rapport
+    $conges = Conge::where('status', 'pending')->get(); 
+    
+
+    // Calculer le pourcentage des employés et des stagiaires
+   
+    // Récupérer les données nécessaires pour le rapport
+    $data = [
+        'title' => 'Rapport de demande de conge',
+        'date' => date('m/d/Y'),
+        'conges' => $conges,
+        
+    ];
+
+    // Charger la vue avec les données et générer le PDF
+    $pdf = PDF::loadView('rapports.conge', $data);
+
+    // Retourner le PDF pour le téléchargement
+    return $pdf->download('rapport_conge.pdf');
 }
 
 }

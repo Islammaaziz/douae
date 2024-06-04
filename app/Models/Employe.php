@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class Employe extends Model
 {
@@ -26,6 +27,7 @@ class Employe extends Model
         'poste',
         'photo',
         'departement',
+        'verification_token',
     ];
 
     protected $hidden = [
@@ -57,5 +59,10 @@ class Employe extends Model
         return $this->belongsToMany(Formation::class, 'formation_user')
             ->withPivot('nom', 'prenom', 'role', 'title')
             ->withTimestamps();
+    }
+    
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \Illuminate\Auth\Notifications\VerifyEmail);
     }
 }
