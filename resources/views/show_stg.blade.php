@@ -35,7 +35,11 @@
     .title{
         margin-left: 20px;
     }
-
+    .taille{
+    width: 650px;
+    text-align: center;
+    margin-left: 15px
+}
 
 
 
@@ -337,31 +341,31 @@
                 <form action="traitement.php" method="post" enctype="multipart/form-data">
                     <div class="title">
                       <label for="nom">Nom :</label>
-                      <input type="text" class="form-control" id="nom" name="nom" required value="{{ $stagiaire->first_name }}">
+                      <input type="text" class="form-control taille" id="nom" name="nom" required value="{{ $stagiaire->first_name }}">
                     </div>
                     <div class="title">
                       <label for="prenom">Prénom :</label>
-                      <input type="text" class="form-control" id="prenom" name="prenom" required value="{{ $stagiaire->last_name }}">
+                      <input type="text" class="form-control taille" id="prenom" name="prenom" required value="{{ $stagiaire->last_name }}">
                     </div>
                     <div class="title">
-                      <label for="Duree_de_stage">Dure de stage</label>
-                      <input  class="form-control" id="Duree_de_stage" name="Duree_de_stage" required value="{{ $stagiaire->Duree_de_stage }}">
+                      <label for="Duree_de_stage">Dure de stage :</label>
+                      <input  class="form-control taille" id="Duree_de_stage" name="Duree_de_stage" required value="{{ $stagiaire->Duree_de_stage }}">
                     </div>
                     <div class="title">
-                      <label for="Tuteur">Tuteur</label>
-                      <input type="text" class="form-control" id="Tuteur" name="Tuteur" required value="{{ $stagiaire->Tuteur }}">
+                      <label for="Tuteur">Tuteur :</label>
+                      <input type="text" class="form-control taille" id="Tuteur" name="Tuteur" required value="{{ $stagiaire->Tuteur }}">
                     </div>
                     <div class="title">
-                      <label for="Mission">Mission</label>
-                      <input type="text" class="form-control" id="Mission" name="Mission" required value="{{ $stagiaire->Mission }}">
+                     <label for="Mission">Mission :</label>
+                      <input type="text" class="form-control taille" id="Mission" name="Mission" required value="{{ $stagiaire->Mission }}">
                     </div>
                     <div class="title">
-                        <label for="phone">Numero de telephone :</label>
-                        <input type="text" class="form-control" id="phone" name="phone" required value="+212{{ $stagiaire->phone }}">
+                      <label for="phone">Numero de telephone :</label>
+                        <input type="text" class="form-control taille" id="phone" name="phone" required value="+212{{ $stagiaire->phone }}">
                       </div>
                     <div class="title">
-                        <label for="email">email :</label>
-                        <input type="text" class="form-control" id="email" name="email" required value="{{ $stagiaire->email }}">
+                       <label for="email">email :</label>
+                        <input type="text" class="form-control taille" id="email" name="email" required value="{{ $stagiaire->email }}">
                       </div>
                    
                     

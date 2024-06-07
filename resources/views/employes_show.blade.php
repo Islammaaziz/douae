@@ -19,6 +19,10 @@
    .bg {
     background: linear-gradient(to bottom, #003e68, #0073c0);
 }
+.md{
+    color: black;
+}
+
 </style>
 
 
@@ -32,7 +36,7 @@
      <div id="wrapper">
 
         <!-- Sidebar -->
-        <        <ul class="navbar-nav bg sidebar sidebar-dark accordion" id="accordionSidebar">
+                <ul class="navbar-nav bg sidebar sidebar-dark accordion" id="accordionSidebar">
             <img src="{{ asset('import/img/logo_bc_skills.png') }}" alt="Logo">
 
            
@@ -162,7 +166,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <h3>BC SKILLS</h3>
+                    <h3 class='md'>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -296,8 +300,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Tables Employes</h1>
-                 <h5>   <p class="mb-4"> <div>cette DataTables contient les employes qui sont actuellement actifs </div></h5>
-                        <i class="fas fa-exclamation-circle"></i> Si Vous voulez consultez des anciens employes veuillez cliquez sur<a target="_blank" href="https://datatables.net">Employes archivees</a>.</p>
+                 <h5>   <p class="mb-4"> <div><i class="fas fa-exclamation-circle"></i> cette Tables contient les employes qui sont actuellement actifs </div></h5>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">

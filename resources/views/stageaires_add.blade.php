@@ -35,6 +35,11 @@
  .title{
     margin-left: 20px;
  }
+ .taille{
+    width: 650px;
+    text-align: center;
+    margin-left: 15px
+}
   
 
 
@@ -326,41 +331,36 @@
                     @csrf
                     <div class="title">
                         <label for="nom">Nom :</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name" required>
+                        <input type="text" class="form-control taille" id="first_name" name="first_name" required>
                     </div>
                     <div class="title">
                         <label for="prenom">Prénom :</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name" required>
+                        <input type="text" class="form-control taille" id="last_name" name="last_name" required>
                     </div>
                     <div class="title">
                         <label for="email">Email :</label>
-                        <input type="text" class="form-control" id="email" name="email" type="email" required>
+                        <input type="text" class="form-control taille" id="email" name="email" type="email" required>
                     </div>
                    
                     <div class="title">
                         <label for="Tuteur">Tuteur :</label>
-                        <input type="text" class="form-control" id="Tuteur" name="Tuteur" required>
+                        <input type="text" class="form-control taille" id="Tuteur" name="Tuteur" required>
                     </div>
                     <div class="title">
                         <label for="Mission">Mission :</label>
-                        <input type="text" class="form-control" id="Mission" name="Mission" required>
+                        <input type="text" class="form-control taille" id="Mission" name="Mission" required>
                     </div>
                     <div class="title">
                         <label for="date_embauche">Numero de telephone</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">+212</span>
-                            </div>
-                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Your phone number" required>
-                        </div>
+                        <input type="text" class="form-control taille" id="phone" name="phone" required>
                     </div>
                     <div class="title">
                         <label for="Duree_de_stage">Duree de stage :</label>
-                        <input type="text" class="form-control" id="Duree_de_stage" name="Duree_de_stage" required>
+                        <input type="text" class="form-control taille" id="Duree_de_stage" name="Duree_de_stage" required>
                     </div>
                     <div class="title">
                         <label for="password">mots de passe :</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="password" class="form-control taille" id="password" name="password" required>
                     </div>
                     
                     <div class="container">

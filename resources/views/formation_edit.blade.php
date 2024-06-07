@@ -36,7 +36,23 @@
  .title{
     margin-left: 20px;
  }
-  
+ .taille{
+    width: 650px;
+    margin-left: 15px
+}
+
+.taill {
+    width: 650px;
+    height: 200px;
+    margin-left: 15px;
+    font-size: 16px; /* Optionnel: ajustez la taille de la police pour mieux s'adapter à la taille */
+    padding: 10px; /* Ajoutez du padding pour plus d'espace intérieur */
+    border: 1px solid #ccc; /* Ajustez la bordure si nécessaire */
+    border-radius: 4px; /* Ajoutez un rayon de bordure pour des coins arrondis */
+    box-sizing: border-box; /* Assurez-vous que le padding et la bordure sont inclus dans la largeur et la hauteur */
+    resize: vertical; /* Permet à l'utilisateur de redimensionner verticalement le textarea */
+}
+
 
 
    
@@ -331,35 +347,35 @@
                     @method('PUT')
                     <div class="title">
                         <label for="titre">Titre :</label>
-                        <input type="text" class="form-control" id="titre" value="{{ $formation->titre }}" name="titre" required>
+                        <input type="text" class="form-control taille" id="titre" value="{{ $formation->titre }}" name="titre" required>
                         @error('titre')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="title">
                         <label for="description">Description :</label>
-                        <input type="text" class="form-control" id="description" value="{{ $formation->description }}"  name="description" required>
+                        <textarea class="form-control taill" id="description" name="description" required>{{ $formation->description }}</textarea>
                         @error('description')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="title">
                         <label for="date_debut">Date Debut :</label>
-                        <input type="date" class="form-control" id="date_debut" value="{{ $formation->date_debut }}" name="date_debut" required>
+                        <input type="date" class="form-control taille" id="date_debut" value="{{ $formation->date_debut }}" name="date_debut" required>
                         @error('date_debut')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="title">
                         <label for="date_fin">Date Fin :</label>
-                        <input type="date" class="form-control" id="date_fin" value="{{ $formation->date_fin }}" name="date_fin" required>
+                        <input type="date" class="form-control taille" id="date_fin" value="{{ $formation->date_fin }}" name="date_fin" required>
                         @error('date_fin')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="title">
                         <label for="lieu">Lieu :</label>
-                        <input type="text" class="form-control" id="lieu" value="{{ $formation->lieu }}" name="lieu" required>
+                        <input type="text" class="form-control taille" id="lieu" value="{{ $formation->lieu }}" name="lieu" required>
                         @error('lieu')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

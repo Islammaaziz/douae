@@ -37,6 +37,9 @@
 .bg {
     background: linear-gradient(to bottom, #003e68, #0073c0);
 }
+.md{
+    color: black;
+}
 
 
 
@@ -186,7 +189,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                   <h3>BC SKILLS</h3>
+                   <h3 class='md'>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -431,9 +434,18 @@
                                     </div>
                                       
                                 </div>
+
+                                     
+                                              
                         
                                 <!-- Project Card Example -->
-                                @foreach($formationsInscrites as $formationInscrite)
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Les formations</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="dropdown no-arrow">
+                                            @foreach($formationsInscrites as $formationInscrite)
                                 <h4 class="small font-weight-bold">
                                      Pourcentage d'inscription au formation de  {{ $formationInscrite['formation']->titre }}
                                     <span class="float-right">{{ number_format($formationInscrite['pourcentageInscription'], 2) }}%</span>
@@ -446,6 +458,13 @@
                                     </div>
                                 </div>
                             @endforeach
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                      
+                                </div>
+                                
 
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">

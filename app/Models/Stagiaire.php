@@ -30,8 +30,9 @@ class Stagiaire extends Model
             ->withPivot('nom', 'prenom', 'role', 'title')
             ->withTimestamps();
     }
+ 
     public function user()
-{
-    return $this->belongsTo(User::class);
-}
+    {
+        return $this->morphOne(User::class, 'profile');
+    }
 }

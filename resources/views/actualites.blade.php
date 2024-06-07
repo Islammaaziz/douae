@@ -73,6 +73,9 @@
     .bg {
     background: linear-gradient(to bottom, #003e68, #0073c0);
 }
+.large-input {
+            width: 100%;
+        }
 
 
 
@@ -372,7 +375,7 @@
 
                                     <div class="form-group">
                                         <label for="contenu">Contenu</label>
-                                        <input type="text" class="form-control" id="contenu" name="contenu" required>
+                                        <input type="text" class="form-control large-input" id="contenu" name="contenu" required>
                                     </div>
                                     @error('contenu')
                                      <div class="alert alert-danger">{{ $message }}</div>

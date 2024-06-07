@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employe;
+use App\Models\User;
 use App\Models\Stagiaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,10 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        $userType = $request->user_type;
-    
-        if ($userType === 'employe') {
+       // $userType = $request->user_type;
+       $user = User::where('email', $request->email)->first();
+
+       if ($user) {
             // Authentification pour les employés
             if (Auth::attempt($credentials)) {
                 $user = Auth::user();
@@ -37,7 +39,7 @@ class LoginController extends Controller
             } else {
                 return redirect()->back()->withErrors(['error' => 'Invalid credentials']);
             }
-        } elseif ($userType === 'stagiaire') {
+        } else  {
             // Authentification pour les stagiaires
             $stagiaire = Stagiaire::where('email', $request->email)->first();
             if ($stagiaire && Hash::check($request->password, $stagiaire->password)) {

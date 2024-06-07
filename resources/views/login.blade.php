@@ -80,22 +80,7 @@
                                     <span class="text-danger"> {{$message}}</span> 
                                     @enderror
                                 </div>
-                                <div class="form-group-choise" >
-                                    <div class="choice">
-                                        <label for="employee_radio">
-                                            <input type="radio" id="employee_radio" name="user_type" value="employe">
-                                            Employe
-                                        </label>
-                            
-                                        <label for="intern_radio">
-                                            <input type="radio" id="intern_radio" name="user_type" value="stagiaire">
-                                            Stageaire
-                                        </label>
-                                        @error('user_type')
-                                        <span class="text-danger"> {{$message}}</span> 
-                                        @enderror
-                                    </div>
-                                </div>
+                                
                             
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">

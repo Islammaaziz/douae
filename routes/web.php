@@ -164,7 +164,7 @@ Route::get('/formations/{id}/utilisateurs', [FormationController::class, 'listeU
 Route::get('/employes/count', [employeControleur::class, 'countEmployes']);
 Route::post('/ajouterEmploye', [employeController::class,'ajouterEmploye'])->name('ajouterEmploye');
 
-Route::get('/employes/{id}', [EmployeController::class, 'show'])->name('show_emp');
+Route::get('/employes/{id}', [employeController::class, 'show'])->name('show_emp');
 
 
 Route::get('/employes_show', [employeController::class, 'employes_show'])->name('employes_show');

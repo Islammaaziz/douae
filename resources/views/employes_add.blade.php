@@ -42,7 +42,11 @@
  .bg {
     background: linear-gradient(to bottom, #003e68, #0073c0);
 }
-  
+.taille{
+    width: 650px;
+    text-align: center;
+    margin-left: 15px
+}
 
 
    
@@ -340,38 +344,33 @@
                 <form action="{{ route('ajouterEmploye') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="title">
-                        <label for="nom">Nom :</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name" required>
+                      <label for="nom">Nom :</label>
+                        <input type="text" class="form-control taille" id="first_name" name="first_name" required>
                     </div>
                     <div class="title">
-                        <label for="prenom">Prénom :</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name" required>
+                       <label for="prenom">Prénom :</label>
+                        <input type="text" class="form-control taille" id="last_name" name="last_name" required>
                     </div>
                     <div class="title">
-                        <label for="email">Email :</label>
-                        <input type="text" class="form-control" id="email" name="email" type="email" required>
+                       <label for="email">Email :</label>
+                        <input type="text" class="form-control taille" id="email" name="email" type="email" required>
                     </div>
                    
                     <div class="title">
-                        <label for="poste">Poste :</label>
-                        <input type="text" class="form-control" id="poste" name="poste" required>
+                     <label for="poste">Poste :</label> 
+                        <input type="text" class="form-control taille" id="poste" name="poste" required>
                     </div>
                     <div class="title">
-                        <label for="date_embauche">Numero de telephone</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">+212</span>
-                            </div>
-                            <input type="text" id="phone" name="phone" class="form-control" placeholder="Your phone number" required>
-                        </div>
+                         <label for="poste">Numero de telephone :</label>
+                        <input type="text" class="form-control taille" id="phone" name="phone" required>
                     </div>
                     <div class="title">
-                        <label for="departement">Département :</label>
-                        <input type="text" class="form-control" id="departement" name="departement" required>
+                       <label for="departement">Département :</label>
+                        <input type="text" class="form-control taille" id="departement" name="departement" required>
                     </div>
                     <div class="title">
-                        <label for="password">Password :</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                       <label for="password">Password :</label>
+                        <input type="password" class="form-control taille" id="password" name="password" required>
                     </div>
                     
                     <div class="container">

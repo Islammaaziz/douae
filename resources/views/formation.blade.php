@@ -541,27 +541,7 @@ h1, h2 {
                                     class="btn btn-success eliminer_la_decoration">Consulter Employés</a>
                                     <a data-toggle="modal" data-target="#deleteModal" data-url="{{ route('delete_emp', ['id' => $formation->id]) }}"  class="btn btn-danger  eliminer_la_decoration">Annuler</a>
                             </div>
-                            <div class="modal fade" id="modalConfirm-{{ $formation->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="modalConfirmLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalConfirmLabel">Confirmation</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Êtes-vous sûr de vouloir supprimer cette formation ?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                            <a href="{{ route('delete_formation', ['id' => $formation->id]) }}"
-                                                class="btn btn-danger">Confirmer</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                           
                         @endforeach
                     </main>
             
@@ -579,6 +559,28 @@ h1, h2 {
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
                                 <a class="btn btn-primary" id="confirmDeleteBtn" href="#">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modalConfirm-{{ $formation->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="modalConfirmLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalConfirmLabel">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Êtes-vous sûr de vouloir supprimer cette formation ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <a href="{{ route('delete_formation', ['id' => $formation->id]) }}"
+                                    class="btn btn-danger">Confirmer</a>
                             </div>
                         </div>
                     </div>

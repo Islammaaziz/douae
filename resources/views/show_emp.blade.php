@@ -45,6 +45,14 @@
     .bg {
     background: linear-gradient(to bottom, #003e68, #0073c0);
 }
+.md{
+    color: black;
+}
+.taille{
+    width: 650px;
+    text-align: center;
+    margin-left: 15px
+}
 
       </style>
 
@@ -187,7 +195,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                   <h3>BC SKILLS</h3>
+                   <h3 class='md'>BC SKILLS</h3>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -331,38 +339,38 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">consulter Employe</h1>
+                    <h1 class="h3 mb-4 text-gray-800">consulter Employe {{ $employe->first_name }} {{ $employe->last_name }}</h1>
 
                 </div>
                 <!-- /.container-fluid -->
                 <form action="traitement.php" method="post" enctype="multipart/form-data">
                     <div class="title">
-                      <label for="nom">Nom :</label>
-                      <input type="text" class="form-control" id="nom" name="nom" required value="{{ $employe->first_name }}">
+                     <h5> <label for="nom">Nom :</label></h5>
+                      <input type="text" class="form-control taille" id="nom" name="nom" required value="{{ $employe->first_name }}">
                     </div>
                     <div class="title">
-                      <label for="prenom">Prénom :</label>
-                      <input type="text" class="form-control" id="prenom" name="prenom" required value="{{ $employe->last_name }}">
+                    <h5>  <label for="prenom">Prénom :</label></h5>
+                      <input type="text" class="form-control taille" id="prenom" name="prenom" required value="{{ $employe->last_name }}" width="100px">
                     </div>
                     <div class="title">
-                      <label for="date_naissance">Date d embauche :</label>
-                      <input type="date" class="form-control" id="date_naissance" name="date_d_embauche" required value="{{ $employe->Date_d_embauche }}">
+                    <h5> <label for="date_naissance">Date d embauche :</label></h5> 
+                      <input type="date" class="form-control taille" id="date_naissance" name="date_d_embauche" required value="{{ $employe->Date_d_embauche }}">
                     </div>
                     <div class="title">
-                      <label for="poste">Poste :</label>
-                      <input type="text" class="form-control" id="poste" name="poste" required value="{{ $employe->poste }}">
+                    <h5>  <label for="poste">Poste :</label></h5>
+                      <input type="text" class="form-control taille" id="poste" name="poste" required value="{{ $employe->poste }}">
                     </div>
                     <div class="title">
-                      <label for="departement">Département :</label>
-                      <input type="text" class="form-control" id="departement" name="departement" required value="{{ $employe->departement }}">
+                     <h5> <label for="departement">Département :</label></h5>
+                      <input type="text" class="form-control taille" id="departement" name="departement" required value="{{ $employe->departement }}">
                     </div>
                     <div class="title">
-                        <label for="departement">numero de telephone :</label>
-                        <input type="text" class="form-control" id="departement" name="departement" required value="+212{{ $employe->phone }}">
+                      <h5>  <label for="departement">numero de telephone :</label></h5>
+                        <input type="text" class="form-control taille" id="departement" name="departement" required value="+212{{ $employe->phone }}">
                       </div>
                     <div class="title">
-                        <label for="email">email :</label>
-                        <input type="text" class="form-control" id="departement" name="departement" required value="{{ $employe->email }}">
+                      <h5>  <label for="email">email :</label></h5>
+                        <input type="text" class="form-control taille" id="departement" name="departement" required value="{{ $employe->email }}">
                       </div>
                    
                     

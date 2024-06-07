@@ -473,7 +473,7 @@ h1, h2 {
                     <!-- Page Heading -->
                     <main>
                         <h2>Liste des Formations</h2>
-                        @foreach($formationsInscrites as $formation)
+                        @foreach($formationsDetails as $formation)
                         <div class="formation-card">
                             <h3>Formation de {{ $formation->titre }}</h3>
                             <p>Date Debut: {{ $formation->date_debut }}</p>

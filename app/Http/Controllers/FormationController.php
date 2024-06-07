@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Formation;
+use App\Models\FormationUser;
 use App\Models\Conge;
 use App\Notifications\NewFormationNotification;
 use Illuminate\Support\Facades\Auth; 
@@ -89,28 +90,22 @@ class FormationController extends BaseController
 
     public function showFormationstg(Request $request)
     {
-         if ($request->session()->has('user')) {
-        $user = $request->session()->get('user');
-
-    // Récupérer toutes les formations
-    $formations = Formation::all();
-
-    // Séparer les formations en deux listes : inscrites et non inscrites
-    $formationsInscrites = [];
-    $formationsNonInscrites = [];
-
-    foreach ($formations as $formation) {
-        if ($formation->users->contains($user->id)) {
-            $formationsInscrites[] = $formation;
-        } else {
-            $formationsNonInscrites[] = $formation;
+        // Récupérer l'utilisateur connecté
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+    
+            // Récupérer les formations auxquelles l'utilisateur est inscrit
+            $formationsInscrites = FormationUser::where('user_id', $user->id)->get();
+            $formationsDetails = [];
+            foreach ($formationsInscrites as $formationInscrite) {
+                $formationsDetails[] = $formationInscrite->formation;
+            }
+    
+    
+            return view('espace_stg.formation_stg', compact('formationsDetails', 'user'));
         }
     }
-        return view('espace_stg.formation_stg', compact('formationsInscrites','user'));
-    
-}
-
-        }
+        
 
         public function compterFormation(Request $request)
         {
@@ -255,25 +250,17 @@ class FormationController extends BaseController
         if ($request->session()->has('user')) {
             $user = $request->session()->get('user');
     
-        // Récupérer toutes les formations
-        $formations = Formation::all();
+            // Récupérer les formations auxquelles l'utilisateur est inscrit
+            $formationsInscrites = FormationUser::where('user_id', $user->id)->get();
     
-        // Séparer les formations en deux listes : inscrites et non inscrites
-        $formationsInscrites = [];
-        $formationsNonInscrites = [];
+            // Récupérer toutes les formations non inscrites
+            $formationsNonInscrites = Formation::whereNotIn('id', $formationsInscrites->pluck('formation_id'))->get();
     
-        foreach ($formations as $formation) {
-            if ($formation->users->contains($user->id)) {
-                $formationsInscrites[] = $formation;
-            } else {
-                $formationsNonInscrites[] = $formation;
-            }
+            return view('espace_stg.prochain_formation_stg', compact('formationsNonInscrites', 'user'));
         }
-            return view('espace_stg.prochain_formation_stg', compact('formationsNonInscrites','user'));
-        
     }
 
-    }
+    
 
     public function edit(Request $request,$id)
     {
@@ -351,10 +338,13 @@ class FormationController extends BaseController
                 'role' => $user->role,// ou 'intern' selon votre logique
                 'title' => $formation->titre,
             ]);
-        }
+        
+        
     }
+    $request->session()->put('user', $user->fresh());
     return redirect()->route('prochain_formation_stg');
 }
+    }
 
     public function update(Request $request, $id)
 {

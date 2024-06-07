@@ -297,8 +297,8 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Tables Stageiares</h1>
-                 <h5>   <p class="mb-4"> <div>cette DataTables contient les stageaires qui sont actuellement actifs </div></h5>
-                        <i class="fas fa-exclamation-circle"></i> Si Vous voulez consultez des anciens stageaires veuillez cliquez sur<a target="_blank" href="https://datatables.net">Stageaires archivees</a>.</p>
+                 <h5>   <p class="mb-4"> <div><i class="fas fa-exclamation-circle"></i> cette DataTables contient les stageaires qui sont actuellement actifs </div></h5>
+                     
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">

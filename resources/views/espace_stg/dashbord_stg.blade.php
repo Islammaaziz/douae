@@ -19,8 +19,9 @@
 
 <style>
     .bg {
-    background: linear-gradient(to bottom, #003e68, #0073c0);
+    background: linear-gradient(to bottom, #0069ae, #0099ff);
 }
+
 
     
 .formation-en-cours {
@@ -347,7 +348,6 @@
                                                 @if ($formationEnCours)
                                               <div class="header">Formation en cours</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$formationEnCours->titre}}</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$formationEnCours->titre}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-chalkboard-teacher"></i>
@@ -393,7 +393,7 @@
                                     </div>
                                       
                                 </div>
-                        >
+                        
                               
                                 <div class="card shadow mb-4">
                                    
@@ -418,7 +418,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach>
+                                        @endforeach
                                         </div>
                                        
                                 </div>

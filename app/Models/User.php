@@ -60,12 +60,7 @@ class User extends Authenticatable
     /**
      * The formations that belong to the user.
      */
-    public function formations()
-    {
-        return $this->belongsToMany(Formation::class, 'formation_user')
-            ->withPivot('nom', 'prenom', 'role', 'title')
-            ->withTimestamps();
-    }
+  
     public function stagiaire()
 {
     return $this->hasOne(Stagiaire::class);

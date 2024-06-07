@@ -35,6 +35,11 @@
     .title{
         margin-left: 20px;
     }
+    .taille{
+    width: 650px;
+    text-align: center;
+    margin-left: 15px
+}
 
 
 
@@ -365,32 +370,32 @@
                 @csrf
                 @method('PUT')
                 <div class="title">
-                    <label for="nom">Nom :</label>
-                    <input type="text" class="form-control" id="nom" name="first_name" required value="{{ old('first_name', $employe->first_name) }}">
+                 <label for="nom">Nom :</label>
+                    <input type="text" class="form-control taille" id="nom" name="first_name" required value="{{ old('first_name', $employe->first_name) }}">
                 </div>
                 <div class="title">
-                    <label for="prenom">Prénom :</label>
-                    <input type="text" class="form-control" id="prenom" name="last_name" required value="{{ old('last_name', $employe->last_name) }}">
+                   <label for="prenom">Prénom :</label>
+                    <input type="text" class="form-control taille" id="prenom" name="last_name" required value="{{ old('last_name', $employe->last_name) }}">
                 </div>
                 <div class="title">
-                    <label for="date_d_embauche">Date d'embauche :</label>
-                    <input type="date" class="form-control" id="date_d_embauche" name="date_d_embauche" required value="{{ old('Date_d_embauche', $employe->Date_d_embauche) }}">
+                 <label for="date_d_embauche">Date d'embauche :</label>
+                    <input type="date" class="form-control taille" id="date_d_embauche" name="date_d_embauche" required value="{{ old('Date_d_embauche', $employe->Date_d_embauche) }}">
                 </div>
                 <div class="title">
-                    <label for="poste">Poste :</label>
-                    <input type="text" class="form-control" id="poste" name="poste" required value="{{ old('poste', $employe->poste) }}">
+                   <label for="poste">Poste :</label>
+                    <input type="text" class="form-control taille" id="poste" name="poste" required value="{{ old('poste', $employe->poste) }}">
                 </div>
                 <div class="title">
                     <label for="departement">Département :</label>
-                    <input type="text" class="form-control" id="departement" name="departement" required value="{{ old('departement', $employe->departement) }}">
+                    <input type="text" class="form-control taille" id="departement" name="departement" required value="{{ old('departement', $employe->departement) }}">
                 </div>
                 <div class="title">
                     <label for="phone">Phone :</label>
-                    <input type="text" class="form-control" id="phone" name="phone" required value="{{ old('phone', $employe->phone) }}">
+                    <input type="text" class="form-control taille" id="phone" name="phone" required value="{{ old('phone', $employe->phone) }}">
                 </div>
                 <div class="title">
                     <label for="email">Email :</label>
-                    <input type="email" class="form-control" id="email" name="email" required value="{{ old('email', $employe->email) }}">
+                    <input type="email" class="form-control taille" id="email" name="email" required value="{{ old('email', $employe->email) }}">
                 </div>
                 <div class="container">
                     <div class="row">
